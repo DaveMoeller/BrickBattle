@@ -9,13 +9,14 @@ public class Brick : MonoBehaviour
     public UnityEvent<int> onDestroyed;
     
     public int PointValue;
+    public int row;
 
     void Start()
     {
         var renderer = GetComponentInChildren<Renderer>();
 
         MaterialPropertyBlock block = new MaterialPropertyBlock();
-        switch (PointValue)
+        switch (row)
         {
             case 1 :
                 //008000
