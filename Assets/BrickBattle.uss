@@ -1,0 +1,6 @@
+VisualElement {}
+/* Target the checkmark background element */
+.unity-radio-button__checkmark-background {
+    border-radius: 50%;
+    /* Add other styles here, like background-color or size adjustments */
+}

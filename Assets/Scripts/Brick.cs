@@ -18,21 +18,27 @@ public class Brick : MonoBehaviour
         switch (PointValue)
         {
             case 1 :
+                //008000
                 block.SetColor("_BaseColor", Color.green);
                 break;
             case 2:
+                //800080
                 block.SetColor("_BaseColor", Color.purple);
                 break;
             case 3:
+                //D2691E
                 block.SetColor("_BaseColor", Color.chocolate);
                 break;
             case 4:
+                //0000FF
                 block.SetColor("_BaseColor", Color.blue);
                 break;
             case 5:
+                //C0C0C0
                 block.SetColor("_BaseColor", Color.silver);
                 break;
             case 6:
+                //FFD700
                 block.SetColor("_BaseColor", Color.gold);
                 break;
             default:

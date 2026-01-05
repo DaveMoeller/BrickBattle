@@ -10,6 +10,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using UnityEngine.UI;
 
 [DefaultExecutionOrder(1000)]
 public class MenuManager : MonoBehaviour
@@ -25,6 +26,8 @@ public class MenuManager : MonoBehaviour
     [UnityEngine.Range(1, 30)]
     public int maxSavedPreviousPlayers = 20;
     public bool usePlayerPreferences = true;
+    public string CurrentLevel = "Green";
+    public ToggleGroup levelToggleGroup;
     //public TMPro.TMP_Text nameInputField;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //void Start()
@@ -69,7 +72,11 @@ public class MenuManager : MonoBehaviour
         {
             Debug.Log("Awake nameInputField is null");
         }
-
+        //levelToggleGroup = GetParent<ToggleGroup>();
+        if (levelToggleGroup == null)
+        {
+            Debug.LogError("ToggleGroup is not assigned!");
+        }
     }
     public void AssignPreviousPlayer()
     {
@@ -196,5 +203,16 @@ public class MenuManager : MonoBehaviour
         //Save Preferences (cookie)
         PlayerPrefs.SetString("playerName", playerName);
         PlayerPrefs.SetString("previousPlayers", string.Join(";", previousPlayers));
+    }
+    public void SetCurrentLevel()
+    {
+        Toggle toggle = levelToggleGroup.ActiveToggles().FirstOrDefault();
+        if (toggle.isOn)
+        {
+            //string level;
+            CurrentLevel = toggle.GetComponentInChildren<Text>().text.Trim();
+            Debug.Log($"Setting current level to: {CurrentLevel}\n");
+
+        }
     }
 }
