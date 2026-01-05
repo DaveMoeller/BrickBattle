@@ -20,6 +20,14 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
     public int bestScore = 0;
     public string playerWithBestScore = "";
+    [Range(1, 10)]
+    public int pointMutiplier = 1;
+    public int pointMutiplierGreen = 1;
+    public int pointMutiplierPurple = 2;
+    public int pointMutiplierChocolate = 3;
+    public int pointMutiplierBlue = 4;
+    public int pointMutiplierSilver = 5;
+    public int pointMutiplierGold = 6;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +40,49 @@ public class MainManager : MonoBehaviour
         {
             playerName = "Player 01";
         }
+        //Set the point multiplier
+        switch (MenuManager.Instance.CurrentLevel)
+        {
+            case
+                "Green":
+                {
+                    pointMutiplier = pointMutiplierGreen;
+                    break;
+                }
+            case
+                "Purple":
+                {
+                    pointMutiplier = pointMutiplierPurple;
+                    break;
+                }
+            case
+                 "Chocolate":
+                {
+                    pointMutiplier = pointMutiplierChocolate;
+                    break;
+                }
+            case
+                 "Blue":
+                {
+                    pointMutiplier = pointMutiplierBlue;
+                    break;
+                }
+            case
+                 "Silver":
+                {
+                    pointMutiplier = pointMutiplierSilver;
+                    break;
+                }
+            case
+                 "Gold":
+                {
+                    pointMutiplier = pointMutiplierGold;
+                    break;
+                }
+            default:
+                pointMutiplier = pointMutiplierGreen;
+                break;
+        }
     }
     private void Reset()
     {
@@ -40,7 +91,7 @@ public class MainManager : MonoBehaviour
     void Setup()
     {
         const float step = 0.6f;
-         int perLine = Mathf.FloorToInt(4.0f / step);
+        int perLine = Mathf.FloorToInt(4.0f / step);
 
         int[] pointCountArray = new[] { 1, 2, 3, 4, 5, 6 };
         for (int i = 0; i < LineCount; ++i)
@@ -49,7 +100,8 @@ public class MainManager : MonoBehaviour
             {
                 Vector3 position = new Vector3(-1.5f + step * x, 2.5f + i * 0.3f, 0);
                 var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
-                brick.PointValue = pointCountArray[i];
+                brick.row = i + 1;
+                brick.PointValue = brick.row * pointMutiplier;
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
