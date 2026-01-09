@@ -41,7 +41,7 @@ public class MenuManager : MonoBehaviour
     //}
     public void Awake()
     {
-        Debug.Log("gameObject.name: " + gameObject.name);
+        Debug.Log("MenuManager gameObject.name: " + gameObject.name);
 
         //start of new code
         if (Instance != null)
