@@ -186,7 +186,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: fb622b1776abe5a439ffbf6a7bcf3e9f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -559,6 +559,19 @@ MonoBehaviour:
   saveFile: /savefile.json
   bestScore: 0
   playerWithBestScore: 
+  pointMutiplier: 1
+  pointMutiplierGreen: 1
+  pointMutiplierPurple: 2
+  pointMutiplierChocolate: 3
+  pointMutiplierBlue: 4
+  pointMutiplierSilver: 5
+  pointMutiplierGold: 6
+  MaterialGreen: {fileID: 2100000, guid: fb622b1776abe5a439ffbf6a7bcf3e9f, type: 2}
+  MaterialPurple: {fileID: 2100000, guid: be20f130135f85d46ac3a5e202de1754, type: 2}
+  MaterialChocolate: {fileID: 2100000, guid: 1349cf5691bf6bb418a540b64ab4949f, type: 2}
+  MaterialBlue: {fileID: 2100000, guid: ec956afcc6b0bfb4db3b13c39385f3fc, type: 2}
+  MaterialSilver: {fileID: 2100000, guid: 9f785125c26b7294f8b8419114b791f6, type: 2}
+  MaterialGold: {fileID: 2100000, guid: 614e687f8814d614a81cd46f1c4e00e9, type: 2}
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +871,7 @@ GameObject:
   - component: {fileID: 850602370}
   - component: {fileID: 850602369}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: BorderRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1363,7 +1376,7 @@ GameObject:
   - component: {fileID: 1288645158}
   - component: {fileID: 1288645157}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: BorderLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1461,57 +1474,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288645155}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1392249571
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1392249573}
-  - component: {fileID: 1392249572}
-  m_Layer: 0
-  m_Name: MenuManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1392249572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392249571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9def155f8776f640807999d6dd9abb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuManager
-  playerName: 
-  saveFile: /savefile.json
-  nameInputField: {fileID: 0}
-  previousPlayers: []
-  previousPlayersDropdown: {fileID: 0}
-  maxSavedPreviousPlayers: 20
-  usePlayerPreferences: 1
---- !u!4 &1392249573
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392249571}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1805.4092, y: 655.048, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1550576932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,7 +1618,7 @@ GameObject:
   - component: {fileID: 1634186527}
   - component: {fileID: 1634186526}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: BorderTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1945,9 +1907,8 @@ SceneRoots:
   - {fileID: 610430371}
   - {fileID: 1568428687}
   - {fileID: 1066359103}
+  - {fileID: 450625941}
   - {fileID: 97436045}
   - {fileID: 1550576933}
-  - {fileID: 450625941}
   - {fileID: 2137539498}
   - {fileID: 455529324}
-  - {fileID: 1392249573}
