@@ -1,4 +1,5 @@
 // Data Persistence
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class MainManager : MonoBehaviour
 {
+    //ToDo: Stop Game when all bricks gone and display "You Won, <name>!"
+    public static MainManager Instance;
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
@@ -17,7 +20,6 @@ public class MainManager : MonoBehaviour
     private bool m_GameOver = false;
     public string playerName; // new variable declared
     public string saveFile = "/savefile_game.json";
-    public static MainManager Instance;
     public int bestScore = 0;
     public string playerWithBestScore = "";
     [Range(1, 10)]
@@ -28,10 +30,58 @@ public class MainManager : MonoBehaviour
     public int pointMutiplierBlue = 4;
     public int pointMutiplierSilver = 5;
     public int pointMutiplierGold = 6;
+    //Colors
+    public Material MaterialGreen;
+    public Material MaterialPurple;
+    public Material MaterialChocolate;
+    public Material MaterialBlue;
+    public Material MaterialSilver;
+    public Material MaterialGold;
+    public void Awake()
+    {
+        Debug.Log("MainManager gameObject.name: " + gameObject.name);
+        if (Instance != null)
+        {
+            //Destroy(gameObject);
+            //return;
+        }
+        else
+        {
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(Instance); // same as GameObject
+
+        }
+        //Setup();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         Setup();
+    }
+    private void Reset()
+    {
+        //m_GameOver = false;
+        //GameOverText.SetActive(false);
+        Setup();
+    }
+    void Setup()
+    {
+        m_Started = false;
+        m_GameOver = false;
+        const float step = 0.6f;
+        int perLine = Mathf.FloorToInt(4.0f / step);
+        float randomRangeLow = 0.0f;
+        float randomRangeHigh = 1.0f;
+
+        LoadAllData();
+        if (MenuManager.Instance != null)
+        {
+            playerName = MenuManager.Instance.playerName;
+        }
+        ScoreText.text = playerName + $" Score : {m_Points}";
+        bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
         if (MenuManager.Instance != null)
         {
             playerName = MenuManager.Instance.playerName;
@@ -47,71 +97,71 @@ public class MainManager : MonoBehaviour
                 "Green":
                 {
                     pointMutiplier = pointMutiplierGreen;
+                    randomRangeLow = 0.0f;
+                    randomRangeHigh = 0.0f;
                     break;
                 }
             case
                 "Purple":
                 {
                     pointMutiplier = pointMutiplierPurple;
+                    randomRangeLow = 0.5f;
+                    randomRangeHigh = 1.0f;
                     break;
                 }
             case
                  "Chocolate":
                 {
                     pointMutiplier = pointMutiplierChocolate;
+                    randomRangeLow = 0.0f;
+                    randomRangeHigh = 0.5f;
                     break;
                 }
             case
                  "Blue":
                 {
                     pointMutiplier = pointMutiplierBlue;
+                    randomRangeLow = 0.25f;
+                    randomRangeHigh = 0.75f;
                     break;
                 }
             case
                  "Silver":
                 {
                     pointMutiplier = pointMutiplierSilver;
+                    randomRangeLow = 0.15f;
+                    randomRangeHigh = 0.85f;
                     break;
                 }
             case
                  "Gold":
                 {
                     pointMutiplier = pointMutiplierGold;
+                    randomRangeLow = 0.0f;
+                    randomRangeHigh = 1.0f;
                     break;
                 }
             default:
                 pointMutiplier = pointMutiplierGreen;
+                randomRangeLow = 0.0f;
+                randomRangeHigh = 0.0f;
                 break;
         }
-    }
-    private void Reset()
-    {
-        Setup();
-    }
-    void Setup()
-    {
-        const float step = 0.6f;
-        int perLine = Mathf.FloorToInt(4.0f / step);
-
-        int[] pointCountArray = new[] { 1, 2, 3, 4, 5, 6 };
+        //int[] pointCountArray = new[] { 1, 2, 3, 4, 5, 6 };
         for (int i = 0; i < LineCount; ++i)
         {
             for (int x = 0; x < perLine; ++x)
             {
                 Vector3 position = new Vector3(-1.5f + step * x, 2.5f + i * 0.3f, 0);
-                var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
+                //Rotate based on level
+                //Quaternion qRotation = Quaternion.identity
+                Quaternion qRotation = Quaternion.Euler(0f, 0f, 90f * Random.Range(randomRangeLow, randomRangeHigh));
+                var brick = Instantiate(BrickPrefab, position, qRotation);
                 brick.row = i + 1;
                 brick.PointValue = brick.row * pointMutiplier;
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
-        LoadAllData();
-        if (MenuManager.Instance != null)
-        {
-            playerName = MenuManager.Instance.playerName;
-        }
-        ScoreText.text = playerName + $" Score : {m_Points}";
-        bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
     }
     private void Update()
     {
@@ -134,7 +184,8 @@ public class MainManager : MonoBehaviour
             {
                 //Ball.transform.SetParent(ballParentTransform);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                LoadAllData();
+                Reset();
+                //LoadAllData();
             }
         }
     }
