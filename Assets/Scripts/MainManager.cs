@@ -219,7 +219,6 @@ public class MainManager : MonoBehaviour
     {
         if (MenuManager.Instance.usePlayerPreferences)
         {
-            //PlayerPrefs.SetString("playerName", playerName);
             PlayerPrefs.SetString("playerWithBestScore", playerWithBestScore);
             PlayerPrefs.SetInt("bestScore", bestScore);
         }
