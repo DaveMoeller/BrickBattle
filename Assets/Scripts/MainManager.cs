@@ -48,11 +48,9 @@ public class MainManager : MonoBehaviour
         else
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(Instance); // same as GameObject
 
         }
-        //Setup();
     }
 
     // Start is called before the first frame update
@@ -206,6 +204,8 @@ public class MainManager : MonoBehaviour
     public void GameOver()
     {
         m_GameOver = true;
+        Text goText = GameOverText.GetComponent<Text>();
+        goText.text = "Game Over " + playerName;
         GameOverText.SetActive(true);
     }
     [System.Serializable]
