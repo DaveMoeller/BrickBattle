@@ -219,8 +219,9 @@ public class MainManager : MonoBehaviour
     {
         if (MenuManager.Instance.usePlayerPreferences)
         {
-            PlayerPrefs.SetString("playerWithBestScore", playerWithBestScore);
-            PlayerPrefs.SetInt("bestScore", bestScore);
+            // Add level color MenuManager.Instance.CurrentLevel
+            PlayerPrefs.SetString("playerWithBestScore" + "_" + MenuManager.Instance.CurrentLevel, playerWithBestScore);
+            PlayerPrefs.SetInt("bestScore" + "_" + MenuManager.Instance.CurrentLevel, bestScore);
         }
         else
         {
@@ -240,8 +241,8 @@ public class MainManager : MonoBehaviour
         if (MenuManager.Instance.usePlayerPreferences)
         {
             playerName = PlayerPrefs.GetString("playerName");
-            playerWithBestScore = PlayerPrefs.GetString("playerWithBestScore");
-            bestScore = PlayerPrefs.GetInt("bestScore");
+            playerWithBestScore = PlayerPrefs.GetString("playerWithBestScore" + "_" + MenuManager.Instance.CurrentLevel);
+            bestScore = PlayerPrefs.GetInt("bestScore" + "_" + MenuManager.Instance.CurrentLevel);
         }
         else
         {
