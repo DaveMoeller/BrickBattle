@@ -11,7 +11,9 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
     public Brick BrickPrefab;
     public int LineCount = 6;
+    //public Ball gameBall;
     public Rigidbody Ball;
+    //public static Rigidbody firstBall;
     public Text ScoreText;
     public Text bestScoreText;
     public GameObject GameOverText;
@@ -37,17 +39,20 @@ public class MainManager : MonoBehaviour
     public Material MaterialBlue;
     public Material MaterialSilver;
     public Material MaterialGold;
+    public Vector3 BallInitialTransform;
     public void Awake()
     {
         Debug.Log("MainManager gameObject.name: " + gameObject.name);
         if (Instance != null)
         {
             //Destroy(gameObject);
-            //return;
+            //Ball = firstBall;
+            return;
         }
         else
         {
             Instance = this;
+            //firstBall = Ball;
             DontDestroyOnLoad(Instance); // same as GameObject
 
         }
@@ -171,9 +176,14 @@ public class MainManager : MonoBehaviour
                 float randomDirection = Random.Range(-1.0f, 1.0f);
                 Vector3 forceDir = new Vector3(randomDirection, 1, 0);
                 forceDir.Normalize();
+                if (Ball != null)
+                {
+                    Ball.transform.SetParent(null);
 
-                Ball.transform.SetParent(null);
-                Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+                    Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+
+                }
+                else { Debug.Log("Ball is null"); }
             }
         }
         else if (m_GameOver)
@@ -204,6 +214,12 @@ public class MainManager : MonoBehaviour
     public void GameOver()
     {
         m_GameOver = true;
+        //stop the ball
+        //BallInitialTransform = Ball.transform.position + Ball.transform.parent.position;
+        //Ball.transform.SetPositionAndRotation(BallInitialTransform,Quaternion.identity);
+        //var velocity = new Vector3(0, 0, 0);
+        //Ball.linearVelocity = velocity;
+        SaveAllData();
         Text goText = GameOverText.GetComponent<Text>();
         goText.text = "Game Over " + playerName;
         GameOverText.SetActive(true);

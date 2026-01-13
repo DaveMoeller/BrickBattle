@@ -3,9 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Ball : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
+    public static Ball Instance;
+    public void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+  //      DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
@@ -20,7 +32,7 @@ public class Ball : MonoBehaviour
         foundObjects = GameObject.FindGameObjectsWithTag("Brick");
         if (foundObjects.Length == 0)
         {
-            velocity = new Vector3 (0, 0, 0);
+            //StopBall();
         }
         else
         {
@@ -44,5 +56,11 @@ public class Ball : MonoBehaviour
         m_Rigidbody.linearVelocity = velocity;
         //ToDo: Count bricks and stop ball if no more
         //ToDo: Display "You Won <name>"
+    }
+    public void StopBall()
+    {
+        var velocity = new Vector3(0, 0, 0);
+        m_Rigidbody.linearVelocity = velocity;
+
     }
 }
