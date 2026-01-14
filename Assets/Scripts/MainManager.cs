@@ -40,6 +40,7 @@ public class MainManager : MonoBehaviour
     public Material MaterialSilver;
     public Material MaterialGold;
     public Vector3 BallInitialTransform;
+    public Color titleColor = Color.green;
     public void Awake()
     {
         Debug.Log("MainManager gameObject.name: " + gameObject.name);
@@ -102,6 +103,7 @@ public class MainManager : MonoBehaviour
                     pointMutiplier = pointMutiplierGreen;
                     randomRangeLow = 0.0f;
                     randomRangeHigh = 0.0f;
+                    titleColor = Color.green;
                     break;
                 }
             case
@@ -110,6 +112,7 @@ public class MainManager : MonoBehaviour
                     pointMutiplier = pointMutiplierPurple;
                     randomRangeLow = 0.5f;
                     randomRangeHigh = 1.0f;
+                    titleColor = Color.purple;
                     break;
                 }
             case
@@ -118,6 +121,7 @@ public class MainManager : MonoBehaviour
                     pointMutiplier = pointMutiplierChocolate;
                     randomRangeLow = 0.0f;
                     randomRangeHigh = 0.5f;
+                    titleColor = Color.chocolate;
                     break;
                 }
             case
@@ -126,6 +130,7 @@ public class MainManager : MonoBehaviour
                     pointMutiplier = pointMutiplierBlue;
                     randomRangeLow = 0.25f;
                     randomRangeHigh = 0.75f;
+                    titleColor = Color.blue;
                     break;
                 }
             case
@@ -134,6 +139,7 @@ public class MainManager : MonoBehaviour
                     pointMutiplier = pointMutiplierSilver;
                     randomRangeLow = 0.15f;
                     randomRangeHigh = 0.85f;
+                    titleColor = Color.silver;
                     break;
                 }
             case
@@ -142,14 +148,17 @@ public class MainManager : MonoBehaviour
                     pointMutiplier = pointMutiplierGold;
                     randomRangeLow = 0.0f;
                     randomRangeHigh = 1.0f;
+                    titleColor = Color.gold;
                     break;
                 }
             default:
                 pointMutiplier = pointMutiplierGreen;
                 randomRangeLow = 0.0f;
                 randomRangeHigh = 0.0f;
+                titleColor = Color.white;
                 break;
         }
+        bestScoreText.color = titleColor;
         //int[] pointCountArray = new[] { 1, 2, 3, 4, 5, 6 };
         for (int i = 0; i < LineCount; ++i)
         {
