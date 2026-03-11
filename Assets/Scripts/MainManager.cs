@@ -43,7 +43,7 @@ public class MainManager : MonoBehaviour
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
     private static PlayerControls controls; // Reference to the generated class
-
+    public PlayerControls PlayerControlsShared {  get { return controls; } }
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
