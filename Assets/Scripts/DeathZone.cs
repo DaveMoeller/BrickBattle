@@ -9,10 +9,8 @@ public class DeathZone : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("DeathZone: other.gameObject.name: " + other.gameObject.name);
+        //Debug.Log("DeathZone: other.gameObject.name: " + other.gameObject.name);
         Destroy(other.gameObject);
-        //Ball ball = (Ball)gameObject;
-        //(Ball)other.gameObject.StopBall();
         Manager.GameOver();
     }
 }

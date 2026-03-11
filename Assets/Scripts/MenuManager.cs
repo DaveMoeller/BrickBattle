@@ -28,20 +28,9 @@ public class MenuManager : MonoBehaviour
     public bool usePlayerPreferences = true;
     public string CurrentLevel = "Green";
     public ToggleGroup levelToggleGroup;
-    //public TMPro.TMP_Text nameInputField;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    //void Start()
-    //{
-
-    //}
-    //public void Start()
-    //{
-    //    nameInputField = GetComponent<TMP_InputField>();
-    //    Debug.Log("nameInputField: " +  nameInputField.name);
-    //}
     public void Awake()
     {
-        Debug.Log("MenuManager gameObject.name: " + gameObject.name);
+        //Debug.Log("MenuManager gameObject.name: " + gameObject.name);
 
         //start of new code
         if (Instance != null)
@@ -81,14 +70,14 @@ public class MenuManager : MonoBehaviour
     public void AssignPreviousPlayer()
     {
         playerName = previousPlayers.ElementAt(previousPlayersDropdown.value);
-        Debug.Log("Chosen Name:" + playerName);
+        //Debug.Log("Chosen Name:" + playerName);
         nameInputField.text = playerName;
     }
     public void SavePlayer()
     {
         if (nameInputField != null && nameInputField.text.Length > 0)
         {
-            Debug.Log("Saving Player: " + nameInputField.text);
+            //Debug.Log("Saving Player: " + nameInputField.text);
             previousPlayers.Insert(0, nameInputField.text);
             previousPlayersDropdown.ClearOptions();
             previousPlayersDropdown.AddOptions(previousPlayers);
@@ -124,15 +113,6 @@ public class MenuManager : MonoBehaviour
     //}
     public void Exit()
     {
-        //if (MenuManager.Instance == null)
-        //{
-        //    Debug.Log("MenuManager.Instance=null");
-        //}
-        //else
-        //{
-        //    Debug.Log("MenuManager.Instance=" + MenuManager.Instance);
-        //}
-
         MenuManager.Instance.SaveAllData();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
@@ -160,7 +140,7 @@ public class MenuManager : MonoBehaviour
             data.previousPlayers = previousPlayers;
 
             string json = JsonUtility.ToJson(data);
-            Debug.Log($"Save File Path: {filePath}\nSaveData:\n{json}");
+            //Debug.Log($"Save File Path: {filePath}\nSaveData:\n{json}");
             File.WriteAllText(filePath, json);
             //    loadButton.SetActive(true);
 
@@ -211,7 +191,7 @@ public class MenuManager : MonoBehaviour
         {
             //string level;
             CurrentLevel = toggle.GetComponentInChildren<Text>().text.Trim();
-            Debug.Log($"Setting current level to: {CurrentLevel}\n");
+            //Debug.Log($"Setting current level to: {CurrentLevel}\n");
 
         }
     }

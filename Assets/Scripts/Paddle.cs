@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Paddle : MonoBehaviour
 {
@@ -8,18 +7,14 @@ public class Paddle : MonoBehaviour
     public float MaxMovement = 2.0f;
 
     // Start is called before the first frame update
+
     void Start()
     {
         MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        //Renderer Renderer = gameObject.GetComponent<Renderer>();
         if (meshRenderer != null)
         {
-            Debug.Log($"meshRenderer: {meshRenderer.name}");
+            //Debug.Log($"meshRenderer: {meshRenderer.name}");
 
-            //Debug.Log($"MainManager.MaterialGreen: {MainManager.Instance.MaterialGreen}");
-
-            //Material material = meshRenderer.material;
-            //meshRenderer.material
             if (MainManager.Instance != null)
             {
                 switch (MenuManager.Instance.CurrentLevel)
@@ -75,16 +70,27 @@ public class Paddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float input = Input.GetAxis("Horizontal");
+        if (Keyboard.current[Key.LeftArrow].isPressed)
+        {
+            //Debug.Log("Direct Left arrow key is held down");
+            Vector3 pos = transform.position;
+            pos.x += (-1) * Speed * Time.deltaTime;
+            if (pos.x < -MaxMovement)
+                pos.x = -MaxMovement;
 
-        Vector3 pos = transform.position;
-        pos.x += input * Speed * Time.deltaTime;
+            transform.position = pos;
 
-        if (pos.x > MaxMovement)
-            pos.x = MaxMovement;
-        else if (pos.x < -MaxMovement)
-            pos.x = -MaxMovement;
+        }
+        if (Keyboard.current[Key.RightArrow].isPressed)
+        {
+            //Debug.Log("Direct Right arrow key is held down");
+            Vector3 pos = transform.position;
+            pos.x += (1) * Speed * Time.deltaTime;
+            if (pos.x > MaxMovement)
+                pos.x = MaxMovement;
 
-        transform.position = pos;
+            transform.position = pos;
+
+        }
     }
 }

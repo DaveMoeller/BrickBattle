@@ -2,18 +2,19 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 public class MainManager : MonoBehaviour
 {
     //ToDo: Stop Game when all bricks gone and display "You Won, <name>!"
     public static MainManager Instance;
     public Brick BrickPrefab;
     public int LineCount = 6;
-    //public Ball gameBall;
     public Rigidbody Ball;
-    //public static Rigidbody firstBall;
     public Text ScoreText;
     public Text bestScoreText;
     public GameObject GameOverText;
@@ -41,19 +42,17 @@ public class MainManager : MonoBehaviour
     public Material MaterialGold;
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
+
     public void Awake()
     {
-        Debug.Log("MainManager gameObject.name: " + gameObject.name);
+        //Debug.Log("MainManager gameObject.name: " + gameObject.name);
         if (Instance != null)
         {
-            //Destroy(gameObject);
-            //Ball = firstBall;
             return;
         }
         else
         {
             Instance = this;
-            //firstBall = Ball;
             DontDestroyOnLoad(Instance); // same as GameObject
 
         }
@@ -66,9 +65,7 @@ public class MainManager : MonoBehaviour
     }
     private void Reset()
     {
-        //m_GameOver = false;
-        //GameOverText.SetActive(false);
-        Setup();
+            Setup();
     }
     void Setup()
     {
@@ -179,7 +176,9 @@ public class MainManager : MonoBehaviour
     {
         if (!m_Started)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            //Direct read from keyboard
+            bool isPressed = Keyboard.current[Key.Space].isPressed;
+            if (isPressed)
             {
                 m_Started = true;
                 float randomDirection = Random.Range(-1.0f, 1.0f);
@@ -197,12 +196,12 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            //Direct read from keyboard
+            bool isPressed = Keyboard.current[Key.Space].isPressed;
+            if (isPressed)
             {
-                //Ball.transform.SetParent(ballParentTransform);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 Reset();
-                //LoadAllData();
             }
         }
     }
@@ -224,10 +223,6 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         //stop the ball
-        //BallInitialTransform = Ball.transform.position + Ball.transform.parent.position;
-        //Ball.transform.SetPositionAndRotation(BallInitialTransform,Quaternion.identity);
-        //var velocity = new Vector3(0, 0, 0);
-        //Ball.linearVelocity = velocity;
         SaveAllData();
         Text goText = GameOverText.GetComponent<Text>();
         goText.text = "Game Over " + playerName;
@@ -250,10 +245,12 @@ public class MainManager : MonoBehaviour
         }
         else
         {
-            SaveData data = new SaveData();
-            data.playerName = playerName;
-            data.bestScore = bestScore;
-            data.playerWithBestScore = playerWithBestScore;
+            SaveData data = new SaveData
+            {
+                playerName = playerName,
+                bestScore = bestScore,
+                playerWithBestScore = playerWithBestScore
+            };
 
             string json = JsonUtility.ToJson(data);
 
@@ -293,7 +290,7 @@ public class MainManager : MonoBehaviour
     public void ExitToMenu()
     {
         SaveAllData();
-        Debug.Log("Loading scene 0");
+        //Debug.Log("Loading scene 0");
         SceneManager.LoadScene(0);
     }
 
