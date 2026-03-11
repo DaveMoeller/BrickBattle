@@ -70,7 +70,9 @@ public class Paddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current[Key.LeftArrow].isPressed)
+        //bool LeftDirectionIsPressed = Keyboard.current[Key.LeftArrow].isPressed;
+        bool LeftDirectionIsPressed = MainManager.Instance.PlayerControlsShared.Gameplay.MoveLeft.IsPressed();
+        if (LeftDirectionIsPressed)
         {
             //Debug.Log("Direct Left arrow key is held down");
             Vector3 pos = transform.position;
@@ -81,7 +83,9 @@ public class Paddle : MonoBehaviour
             transform.position = pos;
 
         }
-        if (Keyboard.current[Key.RightArrow].isPressed)
+        //bool RightDirectionIsPressed = Keyboard.current[Key.RightArrow].isPressed;
+        bool RightDirectionIsPressed = MainManager.Instance.PlayerControlsShared.Gameplay.MoveRight.IsPressed();
+        if (RightDirectionIsPressed)
         {
             //Debug.Log("Direct Right arrow key is held down");
             Vector3 pos = transform.position;

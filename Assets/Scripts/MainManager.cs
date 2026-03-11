@@ -42,6 +42,17 @@ public class MainManager : MonoBehaviour
     public Material MaterialGold;
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
+    private static PlayerControls controls; // Reference to the generated class
+    public PlayerControls PlayerControlsShared {  get { return controls; } }
+    void OnEnable()
+    {
+        controls.Enable(); // Actions must be enabled
+    }
+
+    void OnDisable()
+    {
+        controls.Disable(); // Actions should be disabled when not in use
+    }
 
     public void Awake()
     {
@@ -53,6 +64,7 @@ public class MainManager : MonoBehaviour
         else
         {
             Instance = this;
+            controls = new PlayerControls();
             DontDestroyOnLoad(Instance); // same as GameObject
 
         }
@@ -65,7 +77,7 @@ public class MainManager : MonoBehaviour
     }
     private void Reset()
     {
-            Setup();
+        Setup();
     }
     void Setup()
     {
@@ -177,7 +189,8 @@ public class MainManager : MonoBehaviour
         if (!m_Started)
         {
             //Direct read from keyboard
-            bool isPressed = Keyboard.current[Key.Space].isPressed;
+            //bool isPressed = Keyboard.current[Key.Space].isPressed;
+            bool isPressed = controls.Gameplay.GameStart.IsPressed();
             if (isPressed)
             {
                 m_Started = true;
@@ -197,7 +210,8 @@ public class MainManager : MonoBehaviour
         else if (m_GameOver)
         {
             //Direct read from keyboard
-            bool isPressed = Keyboard.current[Key.Space].isPressed;
+            //bool isPressed = Keyboard.current[Key.Space].isPressed;
+            bool isPressed = controls.Gameplay.GameStart.IsPressed();
             if (isPressed)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
