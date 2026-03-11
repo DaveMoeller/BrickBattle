@@ -16,7 +16,6 @@ public class Ball : MonoBehaviour
             return;
         }
         Instance = this;
-  //      DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -54,7 +53,6 @@ public class Ball : MonoBehaviour
         }
 
         m_Rigidbody.linearVelocity = velocity;
-        //ToDo: Count bricks and stop ball if no more
         //ToDo: Display "You Won <name>"
     }
     public void StopBall()

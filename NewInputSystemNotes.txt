@@ -1,0 +1,79 @@
+unity convert old input horizontal to new input system
+https://www.google.com/search?q=unity+convert+old+input+horizontal+to+new+input+system&rlz=1C1JJTC_enUS1084US1084&oq=unity+convert+old+input+horizontal+to+new+input+system&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRigATIHCAUQIRirAjIHCAYQIRirAjIHCAcQIRifBdIBCjM0ODMzajBqMTWoAgiwAgHxBU3IWuNsWNtQ8QVNyFrjbFjbUA&sourceid=chrome&ie=UTF-8&zx=1773174784560&no_sw_cr=1
+
+Step 1: Install the New Input System Package 
+Go to Window > Package Manager.
+Select the Unity Registry from the top-left dropdown.
+Find and install the Input System package.
+Unity will prompt you to disable the old input system and restart the editor. You can choose to disable the old one or enable Both in Edit > Project Settings > Player > Other Settings > Active Input Handling. 
+YouTube
+YouTube
+ +4
+Step 2: Create an Input Actions Asset 
+Right-click in your Project window and select Create > Input Actions.
+Name the new asset (e.g., "PlayerControls") and double-click it to open the Input Actions editor.
+In the Actions editor:
+Create a new Action Map (e.g., "Gameplay").
+Create a new Action within that map (e.g., "Move").
+Set the Action Type to Value and the Control Type to Vector2.
+Add a Composite Binding (e.g., "2D Vector") and configure bindings for W, S, A, D keys, or a Gamepad stick.
+Check the box for Generate C# Wrapper Class in the Inspector for the asset and click Apply. 
+Unity Discussions
+Unity Discussions
+ +4
+Step 3: Update Your C# Script
+Instead of using Input.GetAxis("Horizontal"), you'll use the generated C# class to read the action's value. 
+Add using UnityEngine.InputSystem; to the top of your script.
+Modify your code to use an action reference: 
+YouTube
+YouTube
+ +2
+Old Code (Input Manager):
+csharp
+
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public float movementSpeed = 5.0f;
+
+    void Update()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
+        transform.Translate(movement * movementSpeed * Time.deltaTime);
+    }
+}
+
+
+new
+using UnityEngine;
+using UnityEngine.InputSystem; //
+
+public class PlayerMovementNew : MonoBehaviour
+{
+    public InputAction moveAction; // Reference the "Move" action asset in the Inspector
+    public float movementSpeed = 5.0f;
+
+    void OnEnable()
+    {
+        moveAction.Enable(); // Enable the action when the object is enabled
+    }
+
+    void OnDisable()
+    {
+        moveAction.Disable(); // Disable the action when the object is disabled
+    }
+
+    void Update()
+    {
+        // Read the 2D vector value from the action
+        Vector2 moveVector = moveAction.ReadValue<Vector2>();
+
+        // Use the x (horizontal) and y (vertical) components for movement
+        Vector3 movement = new Vector3(moveVector.x, 0.0f, moveVector.y);
+        transform.Translate(movement * movementSpeed * Time.deltaTime);
+    }
+}
