@@ -1,5 +1,5 @@
 # Brick Battle
-Basic brick battle game with levels.
+Basic brick battle game with levels of difficulty.
 ## Keys
 The following are navigation keys:
 
