@@ -238,6 +238,7 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         //stop the ball
         SaveAllData();
+        //ToDo: Count remaing bricks and see if won or lost
         Text goText = GameOverText.GetComponent<Text>();
         goText.text = "Game Over " + playerName;
         GameOverText.SetActive(true);
@@ -269,7 +270,6 @@ public class MainManager : MonoBehaviour
             string json = JsonUtility.ToJson(data);
 
             File.WriteAllText(Application.persistentDataPath + saveFile, json);
-            //    loadButton.SetActive(true);
         }
     }
     public void LoadAllData()

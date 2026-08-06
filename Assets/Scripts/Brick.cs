@@ -15,7 +15,7 @@ public class Brick : MonoBehaviour
     {
         var renderer = GetComponentInChildren<Renderer>();
 
-        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        MaterialPropertyBlock block = new();
         switch (row)
         {
             case 1 :

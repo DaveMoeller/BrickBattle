@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance;
     public static GameObject MenuCanvas;
     //public MenuManager Instance;
-    public List<string> previousPlayers = new List<string>();
+    public List<string> previousPlayers = new();
     public TMP_Dropdown previousPlayersDropdown;
     [UnityEngine.Range(1, 30)]
     public int maxSavedPreviousPlayers = 20;
@@ -134,7 +134,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            SaveData data = new SaveData();
+            SaveData data = new();
             string filePath = Application.persistentDataPath + saveFile;
             data.playerName = playerName;
             data.previousPlayers = previousPlayers;
@@ -164,12 +164,9 @@ public class MenuManager : MonoBehaviour
             {
                 string json = File.ReadAllText(path);
                 SaveData data = JsonUtility.FromJson<SaveData>(json);
-
                 playerName = data.playerName;
                 previousPlayers = data.previousPlayers;
-                //previousPlayersDropdown.ClearOptions();
-                //previousPlayersDropdown.AddOptions(data.previousPlayers);
-            }
+             }
         }
     }
     public void LoadAllPreferences()
