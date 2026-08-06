@@ -275,15 +275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 4
   MaxMovement: 2
-  moveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 34ba70a7-cf4f-4ebc-b714-a2d85f1cce3c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!1 &177912857
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,15 +576,6 @@ MonoBehaviour:
   MaterialGold: {fileID: 2100000, guid: 614e687f8814d614a81cd46f1c4e00e9, type: 2}
   BallInitialTransform: {x: 0, y: 0, z: 0}
   titleColor: {r: 0, g: 1, b: 0, a: 1}
-  gameStartAction:
-    m_Name: Game Start
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 80ed6739-060a-4600-a4b8-8e4d49825033
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,7 +1552,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568428685}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
@@ -1622,7 +1604,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -1974,6 +1956,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
