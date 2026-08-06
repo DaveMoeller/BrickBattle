@@ -173,7 +173,7 @@ public class MainManager : MonoBehaviour
         {
             for (int x = 0; x < perLine; ++x)
             {
-                Vector3 position = new Vector3(-1.5f + step * x, 2.5f + i * 0.3f, 0);
+                Vector3 position = new(-1.5f + step * x, 2.5f + i * 0.3f, 0);
                 //Rotate based on level
                 //Quaternion qRotation = Quaternion.identity
                 Quaternion qRotation = Quaternion.Euler(0f, 0f, 90f * Random.Range(randomRangeLow, randomRangeHigh));
@@ -195,7 +195,7 @@ public class MainManager : MonoBehaviour
             {
                 m_Started = true;
                 float randomDirection = Random.Range(-1.0f, 1.0f);
-                Vector3 forceDir = new Vector3(randomDirection, 1, 0);
+                Vector3 forceDir = new(randomDirection, 1, 0);
                 forceDir.Normalize();
                 if (Ball != null)
                 {
@@ -260,7 +260,7 @@ public class MainManager : MonoBehaviour
         }
         else
         {
-            SaveData data = new SaveData
+            SaveData data = new()
             {
                 playerName = playerName,
                 bestScore = bestScore,
