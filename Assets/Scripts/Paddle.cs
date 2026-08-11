@@ -18,55 +18,10 @@ public class Paddle : MonoBehaviour
 
             if (MainManager.Instance != null)
             {
-                switch (GameUIData.Instance.CurrentLevel)
-                {
-                    case
-                        "Green":
-                        {
-                            meshRenderer.material = MainManager.Instance.MaterialGreen;
-                            meshRendererBall.material = MainManager.Instance.MaterialGreen;
-                            break;
-                        }
-                    case
-                        "Purple":
-                        {
-                            meshRenderer.material = MainManager.Instance.MaterialPurple;
-                            meshRendererBall.material = MainManager.Instance.MaterialPurple;
-                            break;
-                        }
-                    case
-                         "Chocolate":
-                        {
-                            meshRenderer.material = MainManager.Instance.MaterialChocolate;
-                            meshRendererBall.material = MainManager.Instance.MaterialChocolate;
-                            break;
-                        }
-                    case
-                         "Blue":
-                        {
-                            meshRenderer.material = MainManager.Instance.MaterialBlue;
-                            meshRendererBall.material = MainManager.Instance.MaterialBlue;
-                            break;
-                        }
-                    case
-                         "Silver":
-                        {
-                            meshRenderer.material = MainManager.Instance.MaterialSilver;
-                            meshRendererBall.material = MainManager.Instance.MaterialSilver;
-                            break;
-                        }
-                    case
-                         "Gold":
-                        {
-                            meshRenderer.material = MainManager.Instance.MaterialGold;
-                            meshRendererBall.material = MainManager.Instance.MaterialGold;
-                            break;
-                        }
-                    default:
-                        meshRenderer.material = MainManager.Instance.MaterialGreen;
-                        meshRendererBall.material = MainManager.Instance.MaterialGreen;
-                        break;
-                }
+                GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
+                meshRenderer.material = levelData.levelMaterial;
+                meshRendererBall.material = levelData.levelMaterial;
+
             }
             else
             {

@@ -27,19 +27,7 @@ public class MainManager : MonoBehaviour
     public string playerWithBestScore = "";
     [Range(1, 10)]
     public int pointMutiplier = 1;
-    public int pointMutiplierGreen = 1;
-    public int pointMutiplierPurple = 2;
-    public int pointMutiplierChocolate = 3;
-    public int pointMutiplierBlue = 4;
-    public int pointMutiplierSilver = 5;
-    public int pointMutiplierGold = 6;
-    //Colors
-    public Material MaterialGreen;
-    public Material MaterialPurple;
-    public Material MaterialChocolate;
-    public Material MaterialBlue;
-    public Material MaterialSilver;
-    public Material MaterialGold;
+     //Colors
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
     private static PlayerControls controls; // Reference to the generated class
@@ -109,57 +97,11 @@ public class MainManager : MonoBehaviour
         pointMutiplier = levelData.levelPoints;
         randomRangeLow = levelData.randomRangeLow;
         randomRangeHigh = levelData.randomRangeHigh;
-
-        //ToDo:Finish
-        switch (GameUIData.Instance.CurrentLevel)
-        {
-            case
-                "Green":
-                {
-                    titleColor = Color.green;
-                    break;
-                }
-            case
-                "Purple":
-                {
-                    titleColor = Color.purple;
-                    break;
-                }
-            case
-                 "Chocolate":
-                {
-                    titleColor = Color.chocolate;
-                    break;
-                }
-            case
-                 "Blue":
-                {
-                    titleColor = Color.blue;
-                    break;
-                }
-            case
-                 "Silver":
-                {
-                    titleColor = Color.silver;
-                    break;
-                }
-            case
-                 "Gold":
-                {
-                    pointMutiplier = pointMutiplierGold;
-                    randomRangeLow = 0.0f;
-                    randomRangeHigh = 1.0f;
-                    titleColor = Color.gold;
-                    break;
-                }
-            default:
-                pointMutiplier = pointMutiplierGreen;
-                randomRangeLow = 0.0f;
-                randomRangeHigh = 0.0f;
-                titleColor = Color.white;
-                break;
-        }
+        titleColor = levelData.levelMaterial.color;
+        //ToDo: Set current score title color
         bestScoreText.color = titleColor;
+        ScoreText.color = titleColor;
+
         for (int i = 0; i < LineCount; ++i)
         {
             for (int x = 0; x < perLine; ++x)
@@ -169,6 +111,11 @@ public class MainManager : MonoBehaviour
                 //Quaternion qRotation = Quaternion.identity
                 Quaternion qRotation = Quaternion.Euler(0f, 0f, 90f * Random.Range(randomRangeLow, randomRangeHigh));
                 var brick = Instantiate(BrickPrefab, position, qRotation);
+                MeshRenderer meshRenderer;
+                meshRenderer = brick.GetComponent<MeshRenderer>();
+                Debug.Log("Current Material: " + meshRenderer.material.name);
+                meshRenderer.material = GameUIData.Instance.gameLevelData[i].levelMaterial;
+                //first row i = 0 so add 1
                 brick.row = i + 1;
                 brick.PointValue = brick.row * pointMutiplier;
                 brick.onDestroyed.AddListener(AddPoint);

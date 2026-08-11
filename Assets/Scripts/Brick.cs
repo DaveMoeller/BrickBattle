@@ -9,6 +9,8 @@ using static Unity.Collections.AllocatorManager;
 [RequireComponent(typeof(ParticleSystem))]
 
 [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(Renderer))]
+[RequireComponent(typeof(BoxCollider))]
 public class Brick : MonoBehaviour
 {
     public UnityEvent<int> onDestroyed;
@@ -25,30 +27,44 @@ public class Brick : MonoBehaviour
         {
             case 1:
                 //008000
-                block.SetColor("_BaseColor", Color.green);
+                //block.SetColor("_BaseColor", Color.green);
+                Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row-1].levelMaterial.color);
                 break;
             case 2:
                 //800080
-                block.SetColor("_BaseColor", Color.purple);
+                //block.SetColor("_BaseColor", Color.purple);
+                Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
                 break;
             case 3:
                 //D2691E
-                block.SetColor("_BaseColor", Color.chocolate);
+                //block.SetColor("_BaseColor", Color.chocolate);
+                Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
                 break;
             case 4:
                 //0000FF
-                block.SetColor("_BaseColor", Color.blue);
+                //block.SetColor("_BaseColor", Color.blue);
+                Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
                 break;
             case 5:
                 //C0C0C0
-                block.SetColor("_BaseColor", Color.silver);
+                //block.SetColor("_BaseColor", Color.silver);
+                Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
                 break;
             case 6:
                 //FFD700
-                block.SetColor("_BaseColor", Color.gold);
+                //block.SetColor("_BaseColor", Color.gold);
+                Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
                 break;
             default:
-                block.SetColor("_BaseColor", Color.red);
+                //block.SetColor("_BaseColor", Color.red);
+                Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[0].levelMaterial.color}");
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[0].levelMaterial.color);
                 break;
         }
         renderer.SetPropertyBlock(block);
@@ -75,14 +91,29 @@ public class Brick : MonoBehaviour
             List<Material> materials = new();
             mr.GetMaterials(materials);
             //
-            SetParticleSystemMaterials(ps, materials);
+            //SetParticleSystemMaterials(ps, materials);
             //SetParticleSystemMaterial(ps, materialBricks[0]);
+            SetParticleSystemColor(ps, materials[0].color);
             ps.Play();
             onDestroyed.Invoke(PointValue);
             var main = ps.main;
 
             //slight delay to be sure the ball have time to bounce
             Destroy(gameObject, main.duration);
+        }
+    }
+    void SetParticleSystemColor(ParticleSystem emitter, Color color)
+    {
+        if (emitter != null)
+        {
+            var main = emitter.main;
+            main.startColor = color;
+            Debug.Log($"main.startColor:{main.startColor}");
+            // Get the Particle System's Renderer
+            //ParticleSystemRenderer psr = emitter.GetComponent<ParticleSystemRenderer>();
+            //List<Material> materials = new List<Material>();
+            //psr.SetMaterials(materials);
+
         }
     }
     void SetParticleSystemMaterial(ParticleSystem emitter, Material material)
