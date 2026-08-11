@@ -43,7 +43,10 @@ public class MainManager : MonoBehaviour
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
     private static PlayerControls controls; // Reference to the generated class
-    public PlayerControls PlayerControlsShared {  get { return controls; } }
+    public PlayerControls PlayerControlsShared { get { return controls; } }
+    //public GAME_LEVELS gameLevel = GAME_LEVELS.Green;
+    //public GameLevelData[] gameLevelData;
+
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
@@ -89,10 +92,6 @@ public class MainManager : MonoBehaviour
         float randomRangeHigh = 1.0f;
 
         LoadAllData();
-        if (MenuManager.Instance != null)
-        {
-            playerName = MenuManager.Instance.playerName;
-        }
         ScoreText.text = playerName + $" Score : {m_Points}";
         bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
         if (MenuManager.Instance != null)
@@ -103,51 +102,44 @@ public class MainManager : MonoBehaviour
         {
             playerName = "Player 01";
         }
+        //
+        //pointMutiplier = GameLevelData.Inst
         //Set the point multiplier
-        switch (MenuManager.Instance.CurrentLevel)
+        GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
+        pointMutiplier = levelData.levelPoints;
+        randomRangeLow = levelData.randomRangeLow;
+        randomRangeHigh = levelData.randomRangeHigh;
+
+        //ToDo:Finish
+        switch (GameUIData.Instance.CurrentLevel)
         {
             case
                 "Green":
                 {
-                    pointMutiplier = pointMutiplierGreen;
-                    randomRangeLow = 0.0f;
-                    randomRangeHigh = 0.0f;
                     titleColor = Color.green;
                     break;
                 }
             case
                 "Purple":
                 {
-                    pointMutiplier = pointMutiplierPurple;
-                    randomRangeLow = 0.5f;
-                    randomRangeHigh = 1.0f;
                     titleColor = Color.purple;
                     break;
                 }
             case
                  "Chocolate":
                 {
-                    pointMutiplier = pointMutiplierChocolate;
-                    randomRangeLow = 0.0f;
-                    randomRangeHigh = 0.5f;
                     titleColor = Color.chocolate;
                     break;
                 }
             case
                  "Blue":
                 {
-                    pointMutiplier = pointMutiplierBlue;
-                    randomRangeLow = 0.25f;
-                    randomRangeHigh = 0.75f;
                     titleColor = Color.blue;
                     break;
                 }
             case
                  "Silver":
                 {
-                    pointMutiplier = pointMutiplierSilver;
-                    randomRangeLow = 0.15f;
-                    randomRangeHigh = 0.85f;
                     titleColor = Color.silver;
                     break;
                 }
@@ -168,7 +160,6 @@ public class MainManager : MonoBehaviour
                 break;
         }
         bestScoreText.color = titleColor;
-        //int[] pointCountArray = new[] { 1, 2, 3, 4, 5, 6 };
         for (int i = 0; i < LineCount; ++i)
         {
             for (int x = 0; x < perLine; ++x)
@@ -255,8 +246,8 @@ public class MainManager : MonoBehaviour
         if (MenuManager.Instance.usePlayerPreferences)
         {
             // Add level color MenuManager.Instance.CurrentLevel
-            PlayerPrefs.SetString("playerWithBestScore" + "_" + MenuManager.Instance.CurrentLevel, playerWithBestScore);
-            PlayerPrefs.SetInt("bestScore" + "_" + MenuManager.Instance.CurrentLevel, bestScore);
+            PlayerPrefs.SetString("playerWithBestScore" + "_" + GameUIData.Instance.CurrentLevel, playerWithBestScore);
+            PlayerPrefs.SetInt("bestScore" + "_" + GameUIData.Instance.CurrentLevel, bestScore);
         }
         else
         {
@@ -277,8 +268,8 @@ public class MainManager : MonoBehaviour
         if (MenuManager.Instance.usePlayerPreferences)
         {
             playerName = PlayerPrefs.GetString("playerName");
-            playerWithBestScore = PlayerPrefs.GetString("playerWithBestScore" + "_" + MenuManager.Instance.CurrentLevel);
-            bestScore = PlayerPrefs.GetInt("bestScore" + "_" + MenuManager.Instance.CurrentLevel);
+            playerWithBestScore = PlayerPrefs.GetString("playerWithBestScore" + "_" + GameUIData.Instance.CurrentLevel);
+            bestScore = PlayerPrefs.GetInt("bestScore" + "_" + GameUIData.Instance.CurrentLevel);
         }
         else
         {

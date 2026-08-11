@@ -20,13 +20,11 @@ public class MenuManager : MonoBehaviour
     public TMP_InputField nameInputField;
     public static MenuManager Instance;
     public static GameObject MenuCanvas;
-    //public MenuManager Instance;
     public List<string> previousPlayers = new();
     public TMP_Dropdown previousPlayersDropdown;
     [UnityEngine.Range(1, 30)]
     public int maxSavedPreviousPlayers = 20;
     public bool usePlayerPreferences = true;
-    public string CurrentLevel = "Green";
     public ToggleGroup levelToggleGroup;
     public void Awake()
     {
@@ -106,11 +104,6 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
     public void Exit()
     {
         MenuManager.Instance.SaveAllData();
@@ -166,7 +159,7 @@ public class MenuManager : MonoBehaviour
                 SaveData data = JsonUtility.FromJson<SaveData>(json);
                 playerName = data.playerName;
                 previousPlayers = data.previousPlayers;
-             }
+            }
         }
     }
     public void LoadAllPreferences()
@@ -186,9 +179,8 @@ public class MenuManager : MonoBehaviour
         Toggle toggle = levelToggleGroup.ActiveToggles().FirstOrDefault();
         if (toggle.isOn)
         {
-            //string level;
-            CurrentLevel = toggle.GetComponentInChildren<Text>().text.Trim();
-            //Debug.Log($"Setting current level to: {CurrentLevel}\n");
+            GameUIData.Instance.CurrentLevel = toggle.GetComponentInChildren<Text>().text.Trim();
+            //Debug.Log($"Setting current level to: {GameUIData.Instance.CurrentLevel}\n");
 
         }
     }

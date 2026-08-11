@@ -1419,7 +1419,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606188885}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
@@ -1471,7 +1471,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -2061,7 +2061,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 9
+  m_UseReflectionProbes: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2106,7 +2107,6 @@ MonoBehaviour:
   previousPlayersDropdown: {fileID: 97360145}
   maxSavedPreviousPlayers: 20
   usePlayerPreferences: 1
-  CurrentLevel: Green
   levelToggleGroup: {fileID: 461006198}
 --- !u!1 &780699769
 GameObject:
@@ -3070,7 +3070,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 38.6
+  field of view: 67.4
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3097,7 +3097,7 @@ Transform:
   m_GameObject: {fileID: 1050250968}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 472.80002, y: 272, z: -10}
+  m_LocalPosition: {x: 1121.05, y: 272, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4774,6 +4774,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681423897}
   m_CullTransparentMesh: 1
+--- !u!1 &1690898397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690898399}
+  - component: {fileID: 1690898398}
+  m_Layer: 0
+  m_Name: GameUIData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1690898398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690898397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0738c3a2b70f35d4e8a55fa9d2d9cc5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameUIData
+  CurrentLevel: Green
+  gameLevel: 0
+  gameLevelData:
+  - name: Green
+    gameLevel: 0
+    levelPoints: 0
+    levelMaterial: {fileID: 2100000, guid: fb622b1776abe5a439ffbf6a7bcf3e9f, type: 2}
+    levelToggle: {fileID: 959160110}
+    randomRangeLow: 0
+    randomRangeHigh: 0
+  - name: Purple
+    gameLevel: 1
+    levelPoints: 6
+    levelMaterial: {fileID: 2100000, guid: be20f130135f85d46ac3a5e202de1754, type: 2}
+    levelToggle: {fileID: 529185677}
+    randomRangeLow: 0.23
+    randomRangeHigh: 0.85
+  - name: Chocolate
+    gameLevel: 2
+    levelPoints: 8
+    levelMaterial: {fileID: 2100000, guid: 1349cf5691bf6bb418a540b64ab4949f, type: 2}
+    levelToggle: {fileID: 885800280}
+    randomRangeLow: 0.12
+    randomRangeHigh: 0.79
+  - name: Blue
+    gameLevel: 3
+    levelPoints: 16
+    levelMaterial: {fileID: 2100000, guid: ec956afcc6b0bfb4db3b13c39385f3fc, type: 2}
+    levelToggle: {fileID: 642262547}
+    randomRangeLow: 0.37
+    randomRangeHigh: 0.63
+  - name: Silver
+    gameLevel: 4
+    levelPoints: 23
+    levelMaterial: {fileID: 2100000, guid: 9f785125c26b7294f8b8419114b791f6, type: 2}
+    levelToggle: {fileID: 1675449755}
+    randomRangeLow: 0.12
+    randomRangeHigh: 0.91
+  - name: Gold
+    gameLevel: 5
+    levelPoints: 32
+    levelMaterial: {fileID: 2100000, guid: 614e687f8814d614a81cd46f1c4e00e9, type: 2}
+    levelToggle: {fileID: 1501003454}
+    randomRangeLow: 0.18
+    randomRangeHigh: 1
+--- !u!4 &1690898399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690898397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7875, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1752948742
 GameObject:
   m_ObjectHideFlags: 0
@@ -5650,5 +5739,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1050250971}
   - {fileID: 606188887}
+  - {fileID: 1690898399}
   - {fileID: 745560287}
   - {fileID: 395934027}

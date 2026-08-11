@@ -18,7 +18,7 @@ public class Paddle : MonoBehaviour
 
             if (MainManager.Instance != null)
             {
-                switch (MenuManager.Instance.CurrentLevel)
+                switch (GameUIData.Instance.CurrentLevel)
                 {
                     case
                         "Green":
