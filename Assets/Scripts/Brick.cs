@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 using UnityEngine.Events;
@@ -29,7 +30,7 @@ public class Brick : MonoBehaviour
                 //008000
                 //block.SetColor("_BaseColor", Color.green);
                 Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row-1].levelMaterial.color);
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
                 break;
             case 2:
                 //800080
@@ -91,9 +92,10 @@ public class Brick : MonoBehaviour
             List<Material> materials = new();
             mr.GetMaterials(materials);
             //
-            //SetParticleSystemMaterials(ps, materials);
+            List<Material> materialList = materials.ToList<Material>();
+            SetParticleSystemMaterials(ps, materialList);
             //SetParticleSystemMaterial(ps, materialBricks[0]);
-            SetParticleSystemColor(ps, materials[0].color);
+            //SetParticleSystemColor(ps, materials[0].color);
             ps.Play();
             onDestroyed.Invoke(PointValue);
             var main = ps.main;
@@ -108,7 +110,7 @@ public class Brick : MonoBehaviour
         {
             var main = emitter.main;
             main.startColor = color;
-            Debug.Log($"main.startColor:{main.startColor}");
+            Debug.Log($"main.startColor:{main.startColor.color}");
             // Get the Particle System's Renderer
             //ParticleSystemRenderer psr = emitter.GetComponent<ParticleSystemRenderer>();
             //List<Material> materials = new List<Material>();
