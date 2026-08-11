@@ -75,27 +75,18 @@ public class Brick : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            //ToDo:Fix ps color
             //Hide the brick
             var mr = GetComponent<Renderer>();
             Material[] materialBricks = mr.materials;
-            Debug.Log($"materialBricks[0].name:{materialBricks[0].name}");
-            Debug.Log($"materialBricks[0].color:{materialBricks[0].color}");
             mr.enabled = false;
             //Remove collider
             BoxCollider col = GetComponent<BoxCollider>();
             col.enabled = false;
             //Get the particle system of brick (this) and play it
             ParticleSystem ps = GetComponent<ParticleSystem>();
-            //
-            //MaterialPropertyBlock block = new();
-            List<Material> materials = new();
-            mr.GetMaterials(materials);
-            //
-            List<Material> materialList = materials.ToList<Material>();
-            SetParticleSystemMaterials(ps, materialList);
-            //SetParticleSystemMaterial(ps, materialBricks[0]);
-            //SetParticleSystemColor(ps, materials[0].color);
+            List<Material> materialsBrick = new();
+            mr.GetMaterials(materialsBrick);
+            SetParticleSystemMaterials(ps, materialsBrick);
             ps.Play();
             onDestroyed.Invoke(PointValue);
             var main = ps.main;
@@ -104,42 +95,13 @@ public class Brick : MonoBehaviour
             Destroy(gameObject, main.duration);
         }
     }
-    void SetParticleSystemColor(ParticleSystem emitter, Color color)
-    {
-        if (emitter != null)
-        {
-            var main = emitter.main;
-            main.startColor = color;
-            Debug.Log($"main.startColor:{main.startColor.color}");
-            // Get the Particle System's Renderer
-            //ParticleSystemRenderer psr = emitter.GetComponent<ParticleSystemRenderer>();
-            //List<Material> materials = new List<Material>();
-            //psr.SetMaterials(materials);
-
-        }
-    }
-    void SetParticleSystemMaterial(ParticleSystem emitter, Material material)
-    {
-        if (emitter != null)
-        {
-            var main = emitter.main;
-            main.startColor = material.color;
-            Debug.Log($"main.startColor:{main.startColor}");
-            // Get the Particle System's Renderer
-            ParticleSystemRenderer psr = emitter.GetComponent<ParticleSystemRenderer>();
-            List<Material> materials = new List<Material>();
-            materials.Add(material);
-            psr.SetMaterials(materials);
-
-        }
-    }
     void SetParticleSystemMaterials(ParticleSystem emitter, List<Material> materials)
     {
         if (emitter != null)
         {
             var main = emitter.main;
             main.startColor = materials[0].color;
-            //main.SetColor("_BaseColor", materials[0].color);
+            //main.SetColor("_BaseColor", materialsBrick[0].color);
             Debug.Log($"main.startColor:{main.startColor}");
             // Get the Particle System's Renderer
             ParticleSystemRenderer psr = emitter.GetComponent<ParticleSystemRenderer>();
