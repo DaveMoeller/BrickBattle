@@ -27,13 +27,11 @@ public class MainManager : MonoBehaviour
     public string playerWithBestScore = "";
     [Range(1, 10)]
     public int pointMutiplier = 1;
-     //Colors
+    //Colors
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
     private static PlayerControls controls; // Reference to the generated class
     public PlayerControls PlayerControlsShared { get { return controls; } }
-    //public GAME_LEVELS gameLevel = GAME_LEVELS.Green;
-    //public GameLevelData[] gameLevelData;
 
     void OnEnable()
     {
@@ -113,7 +111,7 @@ public class MainManager : MonoBehaviour
                 var brick = Instantiate(BrickPrefab, position, qRotation);
                 MeshRenderer meshRenderer;
                 meshRenderer = brick.GetComponent<MeshRenderer>();
-                Debug.Log("Current Material: " + meshRenderer.material.name);
+                //Debug.Log("Current Material: " + meshRenderer.material.name);
                 meshRenderer.material = GameUIData.Instance.gameLevelData[i].levelMaterial;
                 //first row i = 0 so add 1
                 brick.row = i + 1;
@@ -142,7 +140,7 @@ public class MainManager : MonoBehaviour
                     Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
 
                 }
-                else { Debug.Log("Ball is null"); }
+                else { Debug.LogError("Ball is null"); }
             }
         }
         else if (m_GameOver)

@@ -2380,7 +2380,7 @@ RectTransform:
   m_GameObject: {fileID: 862888190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.19, y: 8.19, z: 8.19}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 745560287}
@@ -3066,7 +3066,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 67.4
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4805,9 +4805,9 @@ MonoBehaviour:
     levelToggle: {fileID: 959160110}
     randomRangeLow: 0
     randomRangeHigh: 0
-    paddleSpeed: 2
+    paddleSpeed: 2.95
     ballVelocity: 0.6
-    ballVelocityMax: 3
+    ballVelocityMax: 2.5
   - name: Easy Peezie
     gameLevel: 1
     levelPoints: 6
@@ -4815,7 +4815,7 @@ MonoBehaviour:
     levelToggle: {fileID: 529185677}
     randomRangeLow: 0.23
     randomRangeHigh: 0.85
-    paddleSpeed: 2.53
+    paddleSpeed: 3
     ballVelocity: 0.7
     ballVelocityMax: 3
   - name: Bouncy
@@ -4837,7 +4837,7 @@ MonoBehaviour:
     randomRangeHigh: 0.63
     paddleSpeed: 3.5
     ballVelocity: 0.8
-    ballVelocityMax: 3
+    ballVelocityMax: 3.65
   - name: Experienced
     gameLevel: 4
     levelPoints: 23
@@ -4847,7 +4847,7 @@ MonoBehaviour:
     randomRangeHigh: 0.91
     paddleSpeed: 4
     ballVelocity: 1
-    ballVelocityMax: 3
+    ballVelocityMax: 4.41
   - name: Golden
     gameLevel: 5
     levelPoints: 32
