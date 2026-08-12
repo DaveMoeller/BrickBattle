@@ -98,7 +98,7 @@ public class MainManager : MonoBehaviour
         randomRangeLow = levelData.randomRangeLow;
         randomRangeHigh = levelData.randomRangeHigh;
         titleColor = levelData.levelMaterial.color;
-        //ToDo: Set current score title color
+        //Set score title color
         bestScoreText.color = titleColor;
         ScoreText.color = titleColor;
 

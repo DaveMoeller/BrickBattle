@@ -1382,9 +1382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Green
-
-'
+  m_Text: Green
 --- !u!222 &583009894
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1972,9 +1970,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Silver
-
-'
+  m_Text: Silver
 --- !u!222 &719044428
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4009,9 +4005,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Purple
-
-'
+  m_Text: Purple
 --- !u!222 &1404946771
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4090,9 +4084,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Gold
-
-'
+  m_Text: Gold
 --- !u!222 &1492481377
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4806,42 +4798,42 @@ MonoBehaviour:
   CurrentLevel: Green
   gameLevel: 0
   gameLevelData:
-  - name: Green
+  - name: Newbie
     gameLevel: 0
     levelPoints: 0
     levelMaterial: {fileID: 2100000, guid: fb622b1776abe5a439ffbf6a7bcf3e9f, type: 2}
     levelToggle: {fileID: 959160110}
     randomRangeLow: 0
     randomRangeHigh: 0
-  - name: Purple
+  - name: Easy Peezie
     gameLevel: 1
     levelPoints: 6
     levelMaterial: {fileID: 2100000, guid: be20f130135f85d46ac3a5e202de1754, type: 2}
     levelToggle: {fileID: 529185677}
     randomRangeLow: 0.23
     randomRangeHigh: 0.85
-  - name: Chocolate
+  - name: Bouncy
     gameLevel: 2
     levelPoints: 8
     levelMaterial: {fileID: 2100000, guid: 1349cf5691bf6bb418a540b64ab4949f, type: 2}
     levelToggle: {fileID: 885800280}
     randomRangeLow: 0.12
     randomRangeHigh: 0.79
-  - name: Blue
+  - name: I can do this
     gameLevel: 3
     levelPoints: 16
     levelMaterial: {fileID: 2100000, guid: ec956afcc6b0bfb4db3b13c39385f3fc, type: 2}
     levelToggle: {fileID: 642262547}
     randomRangeLow: 0.37
     randomRangeHigh: 0.63
-  - name: Silver
+  - name: Experienced
     gameLevel: 4
     levelPoints: 23
     levelMaterial: {fileID: 2100000, guid: 9f785125c26b7294f8b8419114b791f6, type: 2}
     levelToggle: {fileID: 1675449755}
     randomRangeLow: 0.12
     randomRangeHigh: 0.91
-  - name: Gold
+  - name: Golden
     gameLevel: 5
     levelPoints: 32
     levelMaterial: {fileID: 2100000, guid: 614e687f8814d614a81cd46f1c4e00e9, type: 2}
@@ -5157,9 +5149,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Chocolate
-
-'
+  m_Text: Chocolate
 --- !u!222 &1861299438
 CanvasRenderer:
   m_ObjectHideFlags: 0

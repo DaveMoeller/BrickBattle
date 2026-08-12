@@ -24,18 +24,23 @@ public class GameUIData : MonoBehaviour
         }
         else
         {
+            if (gameLevelData.Length != 6)
+            {
+                Debug.LogError("There needs to be 6 gameLevelData elements defined!");
+                return;
+            }
             Instance = this;
             DontDestroyOnLoad(Instance);
             // set up dictionary
             for (int i = 0; i < gameLevelData.Length; i++)
             {
-                if (gameDictionary.ContainsKey(gameLevelData[i].gameLevel.ToString()))
+                if (gameDictionary.ContainsKey(gameLevelData[i].name))
                 {
-                    Debug.LogError($"Key is duplicated: {gameLevelData[i].gameLevel}");
+                    Debug.LogError($"Key is duplicated: {gameLevelData[i].name}");
                 }
                 else
                 {
-                    gameDictionary.Add(gameLevelData[i].gameLevel.ToString(), gameLevelData[i]);
+                    gameDictionary.Add(gameLevelData[i].name, gameLevelData[i]);
                 }
             }
         }

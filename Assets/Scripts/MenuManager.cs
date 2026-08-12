@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using UnityEngine.UI;
+using System.Reflection.Emit;
 
 [DefaultExecutionOrder(1000)]
 public class MenuManager : MonoBehaviour
@@ -64,6 +65,18 @@ public class MenuManager : MonoBehaviour
         {
             Debug.LogError("ToggleGroup is not assigned!");
         }
+    }
+    public void Start()
+    {
+        for (int i = 0; i < GameUIData.Instance.gameLevelData.Length; i++)
+        {
+            //ToDo: set label text
+            Transform labelTransform = GameUIData.Instance.gameLevelData[i].levelToggle.transform.Find("Label");
+            Text labelText = labelTransform.GetComponent<Text>();
+            labelText.text = GameUIData.Instance.gameLevelData[i].name;
+
+        }
+
     }
     public void AssignPreviousPlayer()
     {
