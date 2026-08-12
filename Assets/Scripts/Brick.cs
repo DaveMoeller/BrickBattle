@@ -77,7 +77,6 @@ public class Brick : MonoBehaviour
         {
             //Hide the brick
             var mr = GetComponent<Renderer>();
-            Material[] materialBricks = mr.materials;
             mr.enabled = false;
             //Remove collider
             BoxCollider col = GetComponent<BoxCollider>();

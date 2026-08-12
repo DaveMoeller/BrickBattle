@@ -1172,8 +1172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: 27.062988}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 10, y: -31.937012}
+  m_SizeDelta: {x: 240, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &461006198
 MonoBehaviour:
@@ -1250,7 +1250,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529185677
 MonoBehaviour:
@@ -1554,7 +1554,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &642262547
 MonoBehaviour:
@@ -2030,10 +2030,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1.68
+  m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2637,7 +2637,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &885800280
 MonoBehaviour:
@@ -2735,7 +2735,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &959160110
 MonoBehaviour:
@@ -3674,7 +3674,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 230, y: 287.9587}
+  m_SizeDelta: {x: 250, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1308606335
 MonoBehaviour:
@@ -4204,7 +4204,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1501003454
 MonoBehaviour:
@@ -4629,7 +4629,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1675449755
 MonoBehaviour:
@@ -4805,6 +4805,9 @@ MonoBehaviour:
     levelToggle: {fileID: 959160110}
     randomRangeLow: 0
     randomRangeHigh: 0
+    paddleSpeed: 2
+    ballVelocity: 0.6
+    ballVelocityMax: 3
   - name: Easy Peezie
     gameLevel: 1
     levelPoints: 6
@@ -4812,6 +4815,9 @@ MonoBehaviour:
     levelToggle: {fileID: 529185677}
     randomRangeLow: 0.23
     randomRangeHigh: 0.85
+    paddleSpeed: 2.53
+    ballVelocity: 0.7
+    ballVelocityMax: 3
   - name: Bouncy
     gameLevel: 2
     levelPoints: 8
@@ -4819,6 +4825,9 @@ MonoBehaviour:
     levelToggle: {fileID: 885800280}
     randomRangeLow: 0.12
     randomRangeHigh: 0.79
+    paddleSpeed: 3
+    ballVelocity: 0.75
+    ballVelocityMax: 3
   - name: I can do this
     gameLevel: 3
     levelPoints: 16
@@ -4826,6 +4835,9 @@ MonoBehaviour:
     levelToggle: {fileID: 642262547}
     randomRangeLow: 0.37
     randomRangeHigh: 0.63
+    paddleSpeed: 3.5
+    ballVelocity: 0.8
+    ballVelocityMax: 3
   - name: Experienced
     gameLevel: 4
     levelPoints: 23
@@ -4833,6 +4845,9 @@ MonoBehaviour:
     levelToggle: {fileID: 1675449755}
     randomRangeLow: 0.12
     randomRangeHigh: 0.91
+    paddleSpeed: 4
+    ballVelocity: 1
+    ballVelocityMax: 3
   - name: Golden
     gameLevel: 5
     levelPoints: 32
@@ -4840,6 +4855,9 @@ MonoBehaviour:
     levelToggle: {fileID: 1501003454}
     randomRangeLow: 0.18
     randomRangeHigh: 1
+    paddleSpeed: 5
+    ballVelocity: 1.5
+    ballVelocityMax: 5
 --- !u!4 &1690898399
 Transform:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class Ball : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
     public static Ball Instance;
+    private float ballVelocity = 0.6f;
+    private float ballVelocityMax = 3.0f;
     public void Awake()
     {
         if (Instance != null)
@@ -21,6 +23,10 @@ public class Ball : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        //Set values based on level
+        GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
+        ballVelocity = levelData.ballVelocity;
+        ballVelocityMax = levelData.ballVelocityMax;
     }
 
     private void OnCollisionExit(Collision other)
@@ -42,13 +48,13 @@ public class Ball : MonoBehaviour
             //check if we are not going totally vertically as this would lead to being stuck, we add a little vertical force
             if (Vector3.Dot(velocity.normalized, Vector3.up) < 0.1f)
             {
-                velocity += velocity.y > 0 ? Vector3.up * 0.6f : Vector3.down * 0.6f;
+                velocity += velocity.y > 0 ? Vector3.up * ballVelocity : Vector3.down * ballVelocity;
             }
 
             //max velocity
-            if (velocity.magnitude > 3.0f)
+            if (velocity.magnitude > ballVelocityMax)
             {
-                velocity = velocity.normalized * 3.0f;
+                velocity = velocity.normalized * ballVelocityMax;
             }
         }
 
@@ -57,6 +63,7 @@ public class Ball : MonoBehaviour
     }
     public void StopBall()
     {
+        //ToDo: Fix StopBall
         var velocity = new Vector3(0, 0, 0);
         m_Rigidbody.linearVelocity = velocity;
 

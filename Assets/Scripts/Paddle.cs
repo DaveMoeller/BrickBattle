@@ -21,6 +21,7 @@ public class Paddle : MonoBehaviour
                 GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
                 meshRenderer.material = levelData.levelMaterial;
                 meshRendererBall.material = levelData.levelMaterial;
+                Speed = levelData.paddleSpeed;
 
             }
             else

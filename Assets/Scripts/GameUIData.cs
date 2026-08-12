@@ -6,8 +6,8 @@ public enum GAME_LEVELS { Green, Purple, Chocolate, Blue, Silver, Gold };
 public class GameUIData : MonoBehaviour
 {
     public static GameUIData Instance;
-    public string CurrentLevel = "Green";
-    public GAME_LEVELS gameLevel = GAME_LEVELS.Green;
+    public string CurrentLevel;
+    public GAME_LEVELS gameLevel;
     public GameLevelData[] gameLevelData;
     private Dictionary<string, GameLevelData> gameDictionary = new();
     public GameLevelData GetGameLevelData(string level)
@@ -31,6 +31,9 @@ public class GameUIData : MonoBehaviour
             }
             Instance = this;
             DontDestroyOnLoad(Instance);
+            //Set defaults
+            CurrentLevel = gameLevelData[0].name;
+            gameLevel = 0;
             // set up dictionary
             for (int i = 0; i < gameLevelData.Length; i++)
             {
@@ -60,6 +63,12 @@ public struct GameLevelData
     public float randomRangeLow;
     [Range(0.0f, 1.0f)]
     public float randomRangeHigh;
+    [Range(1.0f, 5.0f)]
+    public float paddleSpeed;
+    [Range(0.1f, 5.0f)]
+    public float ballVelocity;
+    [Range(1.0f, 5.0f)]
+    public float ballVelocityMax;
     public GameLevelData(GAME_LEVELS level, Material material, Toggle toggle, int points = 1)
     {
         name = "Game Levels";
@@ -69,6 +78,9 @@ public struct GameLevelData
         levelToggle = toggle;
         randomRangeLow = 0.0f;
         randomRangeHigh = 0.0f;
+        paddleSpeed = 2.0f;
+        ballVelocity = 0.6f;
+        ballVelocityMax = 1.0f;
     }
 }
 
