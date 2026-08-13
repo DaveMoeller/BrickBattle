@@ -89,7 +89,7 @@ public class Brick : MonoBehaviour
             ps.Play();
             onDestroyed.Invoke(PointValue);
             var main = ps.main;
-
+            GameUIData.Instance.RemoveBrick();
             //slight delay to be sure the ball have time to bounce
             Destroy(gameObject, main.duration);
         }

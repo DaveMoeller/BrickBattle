@@ -119,6 +119,7 @@ public class MainManager : MonoBehaviour
                 brick.row = i + 1;
                 brick.PointValue = brick.row * pointMutiplier;
                 brick.onDestroyed.AddListener(AddPoint);
+                GameUIData.Instance.AddBrick();
             }
         }
     }
@@ -126,23 +127,15 @@ public class MainManager : MonoBehaviour
     {
         if (!m_Started)
         {
-            //Direct read from keyboard
-            //bool isPressed = Keyboard.current[Key.Space].isPressed;
             bool isPressed = controls.Gameplay.GameStart.IsPressed();
-            if (isPressed)
+            if (isPressed && (Ball != null))
             {
                 m_Started = true;
                 float randomDirection = Random.Range(-1.0f, 1.0f);
                 Vector3 forceDir = new(randomDirection, 1, 0);
                 forceDir.Normalize();
-                if (Ball != null)
-                {
-                    Ball.transform.SetParent(null);
-
-                    Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
-
-                }
-                else { Debug.LogError("Ball is null"); }
+                Ball.transform.SetParent(null);
+                Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
             }
         }
         else if (m_GameOver)
@@ -155,6 +148,10 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 Reset();
             }
+        }
+        if (GameUIData.Instance.GetNumberOfBricks() == 0)
+        {
+            GameOver();
         }
     }
 

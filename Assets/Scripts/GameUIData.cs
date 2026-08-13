@@ -10,10 +10,20 @@ public class GameUIData : MonoBehaviour
     public GAME_LEVELS gameLevel;
     public GameLevelData[] gameLevelData;
     private Dictionary<string, GameLevelData> gameDictionary = new();
+    private int numberOfBricks = 0;
     public GameLevelData GetGameLevelData(string level)
     {
         return gameDictionary[level];
     }
+    public void AddBrick()
+    {
+        numberOfBricks++;
+    }
+    public void RemoveBrick()
+    {
+        numberOfBricks--;
+    }
+    public int GetNumberOfBricks() { return numberOfBricks; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
