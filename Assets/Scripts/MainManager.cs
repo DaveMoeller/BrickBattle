@@ -173,9 +173,12 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         //stop the ball
         SaveAllData();
-        //ToDo: Count remaing bricks and see if won or lost
         Text goText = GameOverText.GetComponent<Text>();
         goText.text = "Game Over " + playerName;
+        if(GameUIData.Instance.GetNumberOfBricks() == 0)
+        {
+            goText.text += ". You Won!";
+        }
         GameOverText.SetActive(true);
     }
     [System.Serializable]

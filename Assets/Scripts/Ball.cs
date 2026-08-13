@@ -48,9 +48,15 @@ public class Ball : MonoBehaviour
             //velocity += velocity.normalized * 0.01f;
 
             //check if we are not going totally vertically as this would lead to being stuck, we add a little vertical force
-            if (Vector3.Dot(velocity.normalized, Vector3.up) < 0.1f)
+            //velocity.normalized
+            float dot = Vector2.Dot(velocity.normalized, Vector2.up);
+            //Debug.Log($"velocity.normalized:{velocity.normalized}");
+            //Debug.Log($"dot:{dot}");
+            if ((dot>.99f)||(dot < -0.99f))
             {
-                velocity += velocity.y > 0 ? Vector3.up * ballVelocity : Vector3.down * ballVelocity;
+                velocity.x = 0.1f;
+                //velocity = velocity;
+                Debug.Log($"new velocity:{velocity}");
             }
 
             //max velocity
@@ -58,7 +64,7 @@ public class Ball : MonoBehaviour
             {
                 velocity = velocity.normalized * ballVelocityMax;
             }
-        m_Rigidbody.linearVelocity = velocity;
+            m_Rigidbody.linearVelocity = velocity;
         }
 
     }
