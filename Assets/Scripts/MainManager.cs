@@ -10,7 +10,6 @@ using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
-    //ToDo: Stop Game when all bricks gone and display "You Won, <name>!"
     public static MainManager Instance;
     public Brick BrickPrefab;
     public int LineCount = 6;
@@ -108,7 +107,6 @@ public class MainManager : MonoBehaviour
             {
                 Vector3 position = new(-1.5f + step * x, 2.5f + i * 0.3f, 0);
                 //Rotate based on level
-                //Quaternion qRotation = Quaternion.identity
                 Quaternion qRotation = Quaternion.Euler(0f, 0f, 90f * Random.Range(randomRangeLow, randomRangeHigh));
                 var brick = Instantiate(BrickPrefab, position, qRotation);
                 MeshRenderer meshRenderer;
@@ -140,8 +138,6 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
-            //Direct read from keyboard
-            //bool isPressed = Keyboard.current[Key.Space].isPressed;
             bool isPressed = controls.Gameplay.GameStart.IsPressed();
             if (isPressed)
             {
@@ -175,7 +171,7 @@ public class MainManager : MonoBehaviour
         SaveAllData();
         Text goText = GameOverText.GetComponent<Text>();
         goText.text = "Game Over " + playerName;
-        if(GameUIData.Instance.GetNumberOfBricks() == 0)
+        if (GameUIData.Instance.GetNumberOfBricks() == 0)
         {
             goText.text += ". You Won!";
         }

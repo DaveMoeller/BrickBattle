@@ -24,50 +24,7 @@ public class Brick : MonoBehaviour
         var renderer = GetComponentInChildren<Renderer>();
 
         MaterialPropertyBlock block = new();
-        switch (row)
-        {
-            case 1:
-                //008000
-                //block.SetColor("_BaseColor", Color.green);
-                //Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
-                break;
-            case 2:
-                //800080
-                //block.SetColor("_BaseColor", Color.purple);
-                //Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
-                break;
-            case 3:
-                //D2691E
-                //block.SetColor("_BaseColor", Color.chocolate);
-                //Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
-                break;
-            case 4:
-                //0000FF
-                //block.SetColor("_BaseColor", Color.blue);
-                //Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
-                break;
-            case 5:
-                //C0C0C0
-                //block.SetColor("_BaseColor", Color.silver);
-                //Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
-                break;
-            case 6:
-                //FFD700
-                //block.SetColor("_BaseColor", Color.gold);
-                //Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
-                break;
-            default:
-                //block.SetColor("_BaseColor", Color.red);
-                //Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[0].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
-                break;
-        }
+        block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
         renderer.SetPropertyBlock(block);
     }
 

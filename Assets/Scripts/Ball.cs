@@ -32,13 +32,13 @@ public class Ball : MonoBehaviour
     private void OnCollisionExit(Collision other)
     {
         var velocity = m_Rigidbody.linearVelocity;
-        //ToDo: Count bricks and stop ball if no more
+        // Count bricks and stop ball if no more
         GameObject[] foundObjects;
         foundObjects = GameObject.FindGameObjectsWithTag("Brick");
         if (foundObjects.Length == 0)
         {
             StopBall();
-            //ToDo: Display "You Won <name>"
+            // Display "You Won <name>"
             Debug.Log("You Won!");
         }
         else
@@ -70,7 +70,7 @@ public class Ball : MonoBehaviour
     }
     public void StopBall()
     {
-        //ToDo: Fix StopBall
+        // StopBall
         var velocity = new Vector3(0, 0, 0);
         m_Rigidbody.linearVelocity = velocity;
 

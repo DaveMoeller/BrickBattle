@@ -31,7 +31,6 @@ public class MenuManager : MonoBehaviour
     {
         //Debug.Log("MenuManager gameObject.name: " + gameObject.name);
 
-        //start of new code
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -39,12 +38,10 @@ public class MenuManager : MonoBehaviour
             LoadAllData();
             return;
         }
-        //end of new code
 
         Instance = this;
         MenuCanvas = this.gameObject;
 
-        //DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(Instance); // same as GameObject
 
         LoadAllData();
@@ -60,7 +57,6 @@ public class MenuManager : MonoBehaviour
         {
             Debug.LogError("Awake nameInputField is null");
         }
-        //levelToggleGroup = GetParent<ToggleGroup>();
         if (levelToggleGroup == null)
         {
             Debug.LogError("ToggleGroup is not assigned!");
@@ -194,11 +190,6 @@ public class MenuManager : MonoBehaviour
         if (toggle.isOn)
         {
             GameUIData.Instance.CurrentLevel = toggle.GetComponentInChildren<Text>().text.Trim();
-            //GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
-            //Debug.Log($"GameUIData.Instance.CurrentLevel: {GameUIData.Instance.CurrentLevel}");
-            //Debug.Log($"Setting current level to: {levelData.name}\n");
-            //GameUIData.Instance.CurrentLevel = levelData.name;
-
         }
     }
 }
