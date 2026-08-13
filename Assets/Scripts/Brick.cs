@@ -65,7 +65,7 @@ public class Brick : MonoBehaviour
             default:
                 //block.SetColor("_BaseColor", Color.red);
                 //Debug.Log($"row {row} color: {GameUIData.Instance.gameLevelData[0].levelMaterial.color}");
-                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[0].levelMaterial.color);
+                block.SetColor("_BaseColor", GameUIData.Instance.gameLevelData[row - 1].levelMaterial.color);
                 break;
         }
         renderer.SetPropertyBlock(block);

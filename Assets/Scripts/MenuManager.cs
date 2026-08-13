@@ -58,7 +58,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Awake nameInputField is null");
+            Debug.LogError("Awake nameInputField is null");
         }
         //levelToggleGroup = GetParent<ToggleGroup>();
         if (levelToggleGroup == null)
@@ -70,18 +70,19 @@ public class MenuManager : MonoBehaviour
     {
         for (int i = 0; i < GameUIData.Instance.gameLevelData.Length; i++)
         {
-            //ToDo: set label text
+            // Set label text
             Transform labelTransform = GameUIData.Instance.gameLevelData[i].levelToggle.transform.Find("Label");
             Text labelText = labelTransform.GetComponent<Text>();
             labelText.text = GameUIData.Instance.gameLevelData[i].name;
 
         }
-
+        SetCurrentLevel();
     }
     public void AssignPreviousPlayer()
     {
         playerName = previousPlayers.ElementAt(previousPlayersDropdown.value);
-        //Debug.Log("Chosen Name:" + playerName);
+        //       Debug.Log("Current Name:" + nameInputField.text);
+        //       Debug.Log("Chosen Name:" + playerName);
         nameInputField.text = playerName;
     }
     public void SavePlayer()
@@ -193,7 +194,10 @@ public class MenuManager : MonoBehaviour
         if (toggle.isOn)
         {
             GameUIData.Instance.CurrentLevel = toggle.GetComponentInChildren<Text>().text.Trim();
-            //Debug.Log($"Setting current level to: {GameUIData.Instance.CurrentLevel}\n");
+            //GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
+            //Debug.Log($"GameUIData.Instance.CurrentLevel: {GameUIData.Instance.CurrentLevel}");
+            //Debug.Log($"Setting current level to: {levelData.name}\n");
+            //GameUIData.Instance.CurrentLevel = levelData.name;
 
         }
     }

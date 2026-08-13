@@ -92,7 +92,9 @@ public class MainManager : MonoBehaviour
         //pointMutiplier = GameLevelData.Inst
         //Set the point multiplier
         GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
+        //Debug.Log($"GameUIData.Instance.CurrentLevel: {GameUIData.Instance.CurrentLevel}");
         pointMutiplier = levelData.levelPoints;
+        //Debug.Log($"pointMultiplier: {pointMutiplier}");
         randomRangeLow = levelData.randomRangeLow;
         randomRangeHigh = levelData.randomRangeHigh;
         titleColor = levelData.levelMaterial.color;

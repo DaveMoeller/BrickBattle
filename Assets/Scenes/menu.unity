@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9def155f8776f640807999d6dd9abb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuUIHandler
-  playerName: 
+  playerName: Test Player 01
   saveFile: /savefile_menu.json
   nameInputField: {fileID: 1536147687}
   previousPlayers: []
@@ -2387,8 +2387,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 90, y: 80}
+  m_AnchoredPosition: {x: -64.5, y: 0.0012817383}
+  m_SizeDelta: {x: 46.65, y: 34.062}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &862888192
 MonoBehaviour:
@@ -4800,17 +4800,17 @@ MonoBehaviour:
   gameLevelData:
   - name: Newbie
     gameLevel: 0
-    levelPoints: 0
+    levelPoints: 10
     levelMaterial: {fileID: 2100000, guid: fb622b1776abe5a439ffbf6a7bcf3e9f, type: 2}
     levelToggle: {fileID: 959160110}
     randomRangeLow: 0
     randomRangeHigh: 0
-    paddleSpeed: 2.95
-    ballVelocity: 0.6
+    paddleSpeed: 3.3
+    ballVelocity: 1.66
     ballVelocityMax: 2.5
   - name: Easy Peezie
     gameLevel: 1
-    levelPoints: 6
+    levelPoints: 20
     levelMaterial: {fileID: 2100000, guid: be20f130135f85d46ac3a5e202de1754, type: 2}
     levelToggle: {fileID: 529185677}
     randomRangeLow: 0.23
@@ -4820,7 +4820,7 @@ MonoBehaviour:
     ballVelocityMax: 3
   - name: Bouncy
     gameLevel: 2
-    levelPoints: 8
+    levelPoints: 30
     levelMaterial: {fileID: 2100000, guid: 1349cf5691bf6bb418a540b64ab4949f, type: 2}
     levelToggle: {fileID: 885800280}
     randomRangeLow: 0.12
@@ -4830,7 +4830,7 @@ MonoBehaviour:
     ballVelocityMax: 3
   - name: I can do this
     gameLevel: 3
-    levelPoints: 16
+    levelPoints: 40
     levelMaterial: {fileID: 2100000, guid: ec956afcc6b0bfb4db3b13c39385f3fc, type: 2}
     levelToggle: {fileID: 642262547}
     randomRangeLow: 0.37
@@ -4840,7 +4840,7 @@ MonoBehaviour:
     ballVelocityMax: 3.65
   - name: Experienced
     gameLevel: 4
-    levelPoints: 23
+    levelPoints: 50
     levelMaterial: {fileID: 2100000, guid: 9f785125c26b7294f8b8419114b791f6, type: 2}
     levelToggle: {fileID: 1675449755}
     randomRangeLow: 0.12
@@ -4850,7 +4850,7 @@ MonoBehaviour:
     ballVelocityMax: 4.41
   - name: Golden
     gameLevel: 5
-    levelPoints: 32
+    levelPoints: 60
     levelMaterial: {fileID: 2100000, guid: 614e687f8814d614a81cd46f1c4e00e9, type: 2}
     levelToggle: {fileID: 1501003454}
     randomRangeLow: 0.18
@@ -5747,6 +5747,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1050250971}
   - {fileID: 606188887}
-  - {fileID: 1690898399}
   - {fileID: 745560287}
+  - {fileID: 1690898399}
   - {fileID: 395934027}

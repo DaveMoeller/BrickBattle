@@ -37,13 +37,15 @@ public class Ball : MonoBehaviour
         foundObjects = GameObject.FindGameObjectsWithTag("Brick");
         if (foundObjects.Length == 0)
         {
-            //StopBall();
+            StopBall();
+            //ToDo: Display "You Won <name>"
+            Debug.Log("You Won!");
         }
         else
         {
 
             //after a collision we accelerate a bit
-            velocity += velocity.normalized * 0.01f;
+            //velocity += velocity.normalized * 0.01f;
 
             //check if we are not going totally vertically as this would lead to being stuck, we add a little vertical force
             if (Vector3.Dot(velocity.normalized, Vector3.up) < 0.1f)
@@ -56,10 +58,9 @@ public class Ball : MonoBehaviour
             {
                 velocity = velocity.normalized * ballVelocityMax;
             }
+        m_Rigidbody.linearVelocity = velocity;
         }
 
-        m_Rigidbody.linearVelocity = velocity;
-        //ToDo: Display "You Won <name>"
     }
     public void StopBall()
     {
