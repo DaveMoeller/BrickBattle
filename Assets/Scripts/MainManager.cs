@@ -166,16 +166,21 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
+        //ToDo: Display Win Message
+        //ToDo: goText is null sometimes
         m_GameOver = true;
         //stop the ball
         SaveAllData();
         Text goText = GameOverText.GetComponent<Text>();
-        goText.text = "Game Over " + playerName;
-        if (GameUIData.Instance.GetNumberOfBricks() == 0)
+        if (goText != null)
         {
-            goText.text += ". You Won!";
+            goText.text = "Game Over " + playerName;
+            if (GameUIData.Instance.GetNumberOfBricks() == 0)
+            {
+                goText.text += ". You Won!";
+            }
+            GameOverText.SetActive(true);
         }
-        GameOverText.SetActive(true);
     }
     [System.Serializable]
     class SaveData
