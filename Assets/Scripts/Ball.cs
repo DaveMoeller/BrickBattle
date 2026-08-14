@@ -39,7 +39,8 @@ public class Ball : MonoBehaviour
         {
             StopBall();
             // Display "You Won <name>"
-            Debug.Log("You Won!");
+            //Debug.Log("You Won!");
+            //MainManager.Instance.GameOver();
         }
         else
         {
@@ -54,9 +55,15 @@ public class Ball : MonoBehaviour
             //Debug.Log($"dot:{dot}");
             if ((dot>.99f)||(dot < -0.99f))
             {
-                velocity.x = 0.1f;
+                velocity.x = UnityEngine.Random.Range(-.5f,.5f);
                 //velocity = velocity;
-                Debug.Log($"new velocity:{velocity}");
+                //Debug.Log($"new x velocity:{velocity}");
+            }
+            if ((dot > -.01f) && (dot <0.01f))
+            {
+                velocity.y = UnityEngine.Random.Range(-.5f, .5f);
+                //velocity = velocity;
+                //Debug.Log($"new y velocity:{velocity}");
             }
 
             //max velocity
