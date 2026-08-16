@@ -168,12 +168,12 @@ GameObject:
   - component: {fileID: 5394040266873869938}
   - component: {fileID: 2363219417721782746}
   m_Layer: 0
-  m_Name: Paddle
+  m_Name: PaddleX
   m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8074606786096607570
 Transform:
   m_ObjectHideFlags: 0

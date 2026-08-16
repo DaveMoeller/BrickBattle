@@ -5,13 +5,15 @@ public class Paddle : MonoBehaviour
 {
     public float Speed = 2.0f;
     public float MaxMovement = 2.0f;
-
+    //private Ball ball;
     // Start is called before the first frame update
 
     void Start()
     {
         MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        MeshRenderer meshRendererBall = gameObject.transform.Find("Ball").gameObject.GetComponent<MeshRenderer>();
+        //Instantiate a new ball with paddle as parent
+        //Ball.Instance ball = gameObject.transform.Find("Ball").gameObject;
+        MeshRenderer meshRendererBall = Ball.Instance.GetComponent<MeshRenderer>();
         if (meshRenderer != null)
         {
             //Debug.Log($"meshRenderer: {meshRenderer.name}");

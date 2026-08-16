@@ -10,6 +10,11 @@ public class Ball : MonoBehaviour
     public static Ball Instance;
     private float ballVelocity = 0.6f;
     private float ballVelocityMax = 3.0f;
+
+    public Rigidbody GetRigidBody()
+    {
+        return m_Rigidbody;
+    }
     public void Awake()
     {
         if (Instance != null)
@@ -33,11 +38,12 @@ public class Ball : MonoBehaviour
     {
         var velocity = m_Rigidbody.linearVelocity;
         // Count bricks and stop ball if no more
-        GameObject[] foundObjects;
-        foundObjects = GameObject.FindGameObjectsWithTag("Brick");
-        if (foundObjects.Length == 0)
+        //GameObject[] foundObjects;
+        //foundObjects = GameObject.FindGameObjectsWithTag("Brick");
+        if (GameUIData.Instance.GetNumberOfBricks() == 0)
         {
-            StopBall();
+            MainManager.Instance.GameOver();
+            //StopBall();
             // Display "You Won <name>"
             //Debug.Log("You Won!");
             //MainManager.Instance.GameOver();

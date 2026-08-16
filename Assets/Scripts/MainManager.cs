@@ -7,16 +7,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
-    public Brick BrickPrefab;
+    [Tooltip("The Brick Prefab")]
+    public GameObject brickPrefab;
+    [Tooltip("The Paddle Prefab")]
+    public GameObject paddlePrefab;
+    [Tooltip("The Ball Prefab")]
+    public GameObject ballPrefab;
+
     public int LineCount = 6;
-    public Rigidbody Ball;
+    private Rigidbody ballRB;
     public Text ScoreText;
     public Text bestScoreText;
-    public GameObject GameOverText;
+    public GameObject gameOverText;
+    public GameObject gameOverTextPrefab;
+    [Tooltip("Canvas for GUI display elments.")]
+    //public GameObject mainCanvas;
     private bool m_Started = false;
     private int m_Points;
     private bool m_GameOver = false;
@@ -31,7 +41,7 @@ public class MainManager : MonoBehaviour
     public Color titleColor = Color.green;
     private static PlayerControls controls; // Reference to the generated class
     public PlayerControls PlayerControlsShared { get { return controls; } }
-
+    private GameObject goTextPrefab;
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
@@ -87,6 +97,11 @@ public class MainManager : MonoBehaviour
         {
             playerName = "Player 01";
         }
+        //ToDo: Instantiate the paddle
+        var paddle = Instantiate(paddlePrefab);
+        //ToDo: Instantiate the ball
+        var ball = Instantiate(ballPrefab);
+        ballRB = ball.GetComponent<Rigidbody>();
         //
         //pointMutiplier = GameLevelData.Inst
         //Set the point multiplier
@@ -100,7 +115,6 @@ public class MainManager : MonoBehaviour
         //Set score title color
         bestScoreText.color = titleColor;
         ScoreText.color = titleColor;
-
         for (int i = 0; i < LineCount; ++i)
         {
             for (int x = 0; x < perLine; ++x)
@@ -108,37 +122,39 @@ public class MainManager : MonoBehaviour
                 Vector3 position = new(-1.5f + step * x, 2.5f + i * 0.3f, 0);
                 //Rotate based on level
                 Quaternion qRotation = Quaternion.Euler(0f, 0f, 90f * Random.Range(randomRangeLow, randomRangeHigh));
-                var brick = Instantiate(BrickPrefab, position, qRotation);
+                var brick = Instantiate(brickPrefab, position, qRotation);
                 MeshRenderer meshRenderer;
                 meshRenderer = brick.GetComponent<MeshRenderer>();
                 //Debug.Log("Current Material: " + meshRenderer.material.name);
                 meshRenderer.material = GameUIData.Instance.gameLevelData[i].levelMaterial;
                 //first row i = 0 so add 1
-                brick.row = i + 1;
-                brick.PointValue = brick.row * pointMutiplier;
-                brick.onDestroyed.AddListener(AddPoint);
+                Brick brickScript = brick.GetComponent<Brick>();
+                brickScript.row = i + 1;
+                brickScript.PointValue = brickScript.row * pointMutiplier;
+                brickScript.onDestroyed.AddListener(AddPoint);
                 GameUIData.Instance.AddBrick();
             }
         }
+
     }
     private void Update()
     {
         if (!m_Started)
         {
             bool isPressed = controls.Gameplay.GameStart.IsPressed();
-            if (isPressed && (Ball != null))
+            if (isPressed && (ballRB != null))
             {
                 m_Started = true;
                 float randomDirection = Random.Range(-1.0f, 1.0f);
                 Vector3 forceDir = new(randomDirection, 1, 0);
                 forceDir.Normalize();
-                Ball.transform.SetParent(null);
-                Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+                ballRB.transform.SetParent(null);
+                ballRB.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
             }
         }
         else if (m_GameOver)
         {
-            bool isPressed = controls.Gameplay.GameStart.IsPressed();
+            bool isPressed = controls.Gameplay.GameStart.WasPerformedThisFrame();
             if (isPressed)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -168,19 +184,24 @@ public class MainManager : MonoBehaviour
     {
         //ToDo: Display Win Message
         //ToDo: goText is null sometimes
-        m_GameOver = true;
+        Ball.Instance.StopBall();
         //stop the ball
         SaveAllData();
-        Text goText = GameOverText.GetComponent<Text>();
+        //ToDo: need to attach to canvas?
+        //goTextPrefab = Instantiate(gameOverTextPrefab);
+        Text goText = gameOverText.GetComponent<Text>();
         if (goText != null)
         {
-            goText.text = "Game Over " + playerName;
+            goText.text = "Game Over " + playerName+ "!";
             if (GameUIData.Instance.GetNumberOfBricks() == 0)
             {
-                goText.text += ". You Won!";
+                goText.text += " You Won!";
             }
-            GameOverText.SetActive(true);
+            //ToDo: Create textfield on GUI for this
+            goText.text += "\n\nPress Space to Restart";
+            gameOverText.SetActive(true);
         }
+        m_GameOver = true;
     }
     [System.Serializable]
     class SaveData
