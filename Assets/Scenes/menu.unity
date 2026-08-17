@@ -1033,7 +1033,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -1172,8 +1172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: 27.062988}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 10, y: -31.937012}
+  m_SizeDelta: {x: 240, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &461006198
 MonoBehaviour:
@@ -1250,7 +1250,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529185677
 MonoBehaviour:
@@ -1371,7 +1371,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1382,9 +1382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Green
-
-'
+  m_Text: Green
 --- !u!222 &583009894
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1419,7 +1417,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606188885}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
@@ -1471,7 +1469,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -1556,7 +1554,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &642262547
 MonoBehaviour:
@@ -1961,7 +1959,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -1972,9 +1970,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Silver
-
-'
+  m_Text: Silver
 --- !u!222 &719044428
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2032,12 +2028,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1.68
+  m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2061,7 +2057,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 9
+  m_UseReflectionProbes: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2099,14 +2096,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9def155f8776f640807999d6dd9abb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuUIHandler
-  playerName: 
+  playerName: Test Player 01
   saveFile: /savefile_menu.json
   nameInputField: {fileID: 1536147687}
   previousPlayers: []
   previousPlayersDropdown: {fileID: 97360145}
   maxSavedPreviousPlayers: 20
   usePlayerPreferences: 1
-  CurrentLevel: Green
   levelToggleGroup: {fileID: 461006198}
 --- !u!1 &780699769
 GameObject:
@@ -2384,15 +2380,15 @@ RectTransform:
   m_GameObject: {fileID: 862888190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.19, y: 8.19, z: 8.19}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 745560287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 90, y: 80}
+  m_AnchoredPosition: {x: -22.98508, y: 20.310638}
+  m_SizeDelta: {x: 44.4581, y: 32.031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &862888192
 MonoBehaviour:
@@ -2641,7 +2637,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &885800280
 MonoBehaviour:
@@ -2739,7 +2735,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &959160110
 MonoBehaviour:
@@ -3070,7 +3066,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 38.6
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3097,7 +3093,7 @@ Transform:
   m_GameObject: {fileID: 1050250968}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 472.80002, y: 272, z: -10}
+  m_LocalPosition: {x: 1121.05, y: 272, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3183,8 +3179,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 550}
+  m_AnchoredPosition: {x: -9.494948, y: 10.90909}
+  m_SizeDelta: {x: 481.0101, y: 528.1819}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070273934
 MonoBehaviour:
@@ -3678,7 +3674,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 219.9157, y: 287.9587}
+  m_SizeDelta: {x: 250, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1308606335
 MonoBehaviour:
@@ -3753,7 +3749,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 233.7845, y: 100.4833}
+  m_SizeDelta: {x: 230, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1377905810
 GameObject:
@@ -3998,7 +3994,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -4009,9 +4005,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Purple
-
-'
+  m_Text: Purple
 --- !u!222 &1404946771
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4079,7 +4073,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -4090,9 +4084,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Gold
-
-'
+  m_Text: Gold
 --- !u!222 &1492481377
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4212,7 +4204,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1501003454
 MonoBehaviour:
@@ -4548,8 +4540,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4637,7 +4629,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_SizeDelta: {x: 240, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1675449755
 MonoBehaviour:
@@ -4774,6 +4766,113 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681423897}
   m_CullTransparentMesh: 1
+--- !u!1 &1690898397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690898399}
+  - component: {fileID: 1690898398}
+  m_Layer: 0
+  m_Name: GameUIData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1690898398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690898397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0738c3a2b70f35d4e8a55fa9d2d9cc5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameUIData
+  CurrentLevel: Green
+  gameLevel: 0
+  gameLevelData:
+  - name: Newbie
+    gameLevel: 0
+    levelPoints: 10
+    levelMaterial: {fileID: 2100000, guid: fb622b1776abe5a439ffbf6a7bcf3e9f, type: 2}
+    levelToggle: {fileID: 959160110}
+    randomRangeLow: 0
+    randomRangeHigh: 0
+    paddleSpeed: 3.3
+    ballVelocity: 1.66
+    ballVelocityMax: 2.5
+  - name: Easy Peezie
+    gameLevel: 1
+    levelPoints: 20
+    levelMaterial: {fileID: 2100000, guid: be20f130135f85d46ac3a5e202de1754, type: 2}
+    levelToggle: {fileID: 529185677}
+    randomRangeLow: 0.23
+    randomRangeHigh: 0.85
+    paddleSpeed: 3
+    ballVelocity: 0.7
+    ballVelocityMax: 3
+  - name: Bouncy
+    gameLevel: 2
+    levelPoints: 30
+    levelMaterial: {fileID: 2100000, guid: 1349cf5691bf6bb418a540b64ab4949f, type: 2}
+    levelToggle: {fileID: 885800280}
+    randomRangeLow: 0.12
+    randomRangeHigh: 0.79
+    paddleSpeed: 3
+    ballVelocity: 0.75
+    ballVelocityMax: 3
+  - name: I can do this
+    gameLevel: 3
+    levelPoints: 40
+    levelMaterial: {fileID: 2100000, guid: ec956afcc6b0bfb4db3b13c39385f3fc, type: 2}
+    levelToggle: {fileID: 642262547}
+    randomRangeLow: 0.37
+    randomRangeHigh: 0.63
+    paddleSpeed: 3.5
+    ballVelocity: 0.8
+    ballVelocityMax: 3.65
+  - name: Experienced
+    gameLevel: 4
+    levelPoints: 50
+    levelMaterial: {fileID: 2100000, guid: 9f785125c26b7294f8b8419114b791f6, type: 2}
+    levelToggle: {fileID: 1675449755}
+    randomRangeLow: 0.12
+    randomRangeHigh: 0.91
+    paddleSpeed: 4
+    ballVelocity: 1
+    ballVelocityMax: 4.41
+  - name: Golden
+    gameLevel: 5
+    levelPoints: 60
+    levelMaterial: {fileID: 2100000, guid: 614e687f8814d614a81cd46f1c4e00e9, type: 2}
+    levelToggle: {fileID: 1501003454}
+    randomRangeLow: 0.18
+    randomRangeHigh: 1
+    paddleSpeed: 5
+    ballVelocity: 1.5
+    ballVelocityMax: 5
+--- !u!4 &1690898399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690898397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7875, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1752948742
 GameObject:
   m_ObjectHideFlags: 0
@@ -5057,7 +5156,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -5068,9 +5167,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Chocolate
-
-'
+  m_Text: Chocolate
 --- !u!222 &1861299438
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5651,4 +5748,5 @@ SceneRoots:
   - {fileID: 1050250971}
   - {fileID: 606188887}
   - {fileID: 745560287}
+  - {fileID: 1690898399}
   - {fileID: 395934027}

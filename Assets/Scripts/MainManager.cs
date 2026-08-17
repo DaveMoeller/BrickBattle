@@ -7,17 +7,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {
-    //ToDo: Stop Game when all bricks gone and display "You Won, <name>!"
     public static MainManager Instance;
-    public Brick BrickPrefab;
+    [Tooltip("The Brick Prefab")]
+    public GameObject brickPrefab;
+    [Tooltip("The Paddle Prefab")]
+    public GameObject paddlePrefab;
+    [Tooltip("The Ball Prefab")]
+    public GameObject ballPrefab;
+
     public int LineCount = 6;
-    public Rigidbody Ball;
+    private Rigidbody ballRB;
     public Text ScoreText;
     public Text bestScoreText;
-    public GameObject GameOverText;
+    public GameObject gameOverText;
+    public GameObject gameOverTextPrefab;
+    [Tooltip("Canvas for GUI display elments.")]
+    //public GameObject mainCanvas;
     private bool m_Started = false;
     private int m_Points;
     private bool m_GameOver = false;
@@ -27,23 +36,12 @@ public class MainManager : MonoBehaviour
     public string playerWithBestScore = "";
     [Range(1, 10)]
     public int pointMutiplier = 1;
-    public int pointMutiplierGreen = 1;
-    public int pointMutiplierPurple = 2;
-    public int pointMutiplierChocolate = 3;
-    public int pointMutiplierBlue = 4;
-    public int pointMutiplierSilver = 5;
-    public int pointMutiplierGold = 6;
     //Colors
-    public Material MaterialGreen;
-    public Material MaterialPurple;
-    public Material MaterialChocolate;
-    public Material MaterialBlue;
-    public Material MaterialSilver;
-    public Material MaterialGold;
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
     private static PlayerControls controls; // Reference to the generated class
-    public PlayerControls PlayerControlsShared {  get { return controls; } }
+    public PlayerControls PlayerControlsShared { get { return controls; } }
+    private GameObject goTextPrefab;
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
@@ -89,10 +87,6 @@ public class MainManager : MonoBehaviour
         float randomRangeHigh = 1.0f;
 
         LoadAllData();
-        if (MenuManager.Instance != null)
-        {
-            playerName = MenuManager.Instance.playerName;
-        }
         ScoreText.text = playerName + $" Score : {m_Points}";
         bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
         if (MenuManager.Instance != null)
@@ -103,120 +97,73 @@ public class MainManager : MonoBehaviour
         {
             playerName = "Player 01";
         }
+        //ToDo: Instantiate the paddle
+        var paddle = Instantiate(paddlePrefab);
+        //ToDo: Instantiate the ball
+        var ball = Instantiate(ballPrefab);
+        ballRB = ball.GetComponent<Rigidbody>();
+        //
+        //pointMutiplier = GameLevelData.Inst
         //Set the point multiplier
-        switch (MenuManager.Instance.CurrentLevel)
-        {
-            case
-                "Green":
-                {
-                    pointMutiplier = pointMutiplierGreen;
-                    randomRangeLow = 0.0f;
-                    randomRangeHigh = 0.0f;
-                    titleColor = Color.green;
-                    break;
-                }
-            case
-                "Purple":
-                {
-                    pointMutiplier = pointMutiplierPurple;
-                    randomRangeLow = 0.5f;
-                    randomRangeHigh = 1.0f;
-                    titleColor = Color.purple;
-                    break;
-                }
-            case
-                 "Chocolate":
-                {
-                    pointMutiplier = pointMutiplierChocolate;
-                    randomRangeLow = 0.0f;
-                    randomRangeHigh = 0.5f;
-                    titleColor = Color.chocolate;
-                    break;
-                }
-            case
-                 "Blue":
-                {
-                    pointMutiplier = pointMutiplierBlue;
-                    randomRangeLow = 0.25f;
-                    randomRangeHigh = 0.75f;
-                    titleColor = Color.blue;
-                    break;
-                }
-            case
-                 "Silver":
-                {
-                    pointMutiplier = pointMutiplierSilver;
-                    randomRangeLow = 0.15f;
-                    randomRangeHigh = 0.85f;
-                    titleColor = Color.silver;
-                    break;
-                }
-            case
-                 "Gold":
-                {
-                    pointMutiplier = pointMutiplierGold;
-                    randomRangeLow = 0.0f;
-                    randomRangeHigh = 1.0f;
-                    titleColor = Color.gold;
-                    break;
-                }
-            default:
-                pointMutiplier = pointMutiplierGreen;
-                randomRangeLow = 0.0f;
-                randomRangeHigh = 0.0f;
-                titleColor = Color.white;
-                break;
-        }
+        GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
+        //Debug.Log($"GameUIData.Instance.CurrentLevel: {GameUIData.Instance.CurrentLevel}");
+        pointMutiplier = levelData.levelPoints;
+        //Debug.Log($"pointMultiplier: {pointMutiplier}");
+        randomRangeLow = levelData.randomRangeLow;
+        randomRangeHigh = levelData.randomRangeHigh;
+        titleColor = levelData.levelMaterial.color;
+        //Set score title color
         bestScoreText.color = titleColor;
-        //int[] pointCountArray = new[] { 1, 2, 3, 4, 5, 6 };
+        ScoreText.color = titleColor;
         for (int i = 0; i < LineCount; ++i)
         {
             for (int x = 0; x < perLine; ++x)
             {
-                Vector3 position = new Vector3(-1.5f + step * x, 2.5f + i * 0.3f, 0);
+                Vector3 position = new(-1.5f + step * x, 2.5f + i * 0.3f, 0);
                 //Rotate based on level
-                //Quaternion qRotation = Quaternion.identity
                 Quaternion qRotation = Quaternion.Euler(0f, 0f, 90f * Random.Range(randomRangeLow, randomRangeHigh));
-                var brick = Instantiate(BrickPrefab, position, qRotation);
-                brick.row = i + 1;
-                brick.PointValue = brick.row * pointMutiplier;
-                brick.onDestroyed.AddListener(AddPoint);
+                var brick = Instantiate(brickPrefab, position, qRotation);
+                MeshRenderer meshRenderer;
+                meshRenderer = brick.GetComponent<MeshRenderer>();
+                //Debug.Log("Current Material: " + meshRenderer.material.name);
+                meshRenderer.material = GameUIData.Instance.gameLevelData[i].levelMaterial;
+                //first row i = 0 so add 1
+                Brick brickScript = brick.GetComponent<Brick>();
+                brickScript.row = i + 1;
+                brickScript.PointValue = brickScript.row * pointMutiplier;
+                brickScript.onDestroyed.AddListener(AddPoint);
+                GameUIData.Instance.AddBrick();
             }
         }
+
     }
     private void Update()
     {
         if (!m_Started)
         {
-            //Direct read from keyboard
-            //bool isPressed = Keyboard.current[Key.Space].isPressed;
             bool isPressed = controls.Gameplay.GameStart.IsPressed();
-            if (isPressed)
+            if (isPressed && (ballRB != null))
             {
                 m_Started = true;
                 float randomDirection = Random.Range(-1.0f, 1.0f);
-                Vector3 forceDir = new Vector3(randomDirection, 1, 0);
+                Vector3 forceDir = new(randomDirection, 1, 0);
                 forceDir.Normalize();
-                if (Ball != null)
-                {
-                    Ball.transform.SetParent(null);
-
-                    Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
-
-                }
-                else { Debug.Log("Ball is null"); }
+                ballRB.transform.SetParent(null);
+                ballRB.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
             }
         }
         else if (m_GameOver)
         {
-            //Direct read from keyboard
-            //bool isPressed = Keyboard.current[Key.Space].isPressed;
-            bool isPressed = controls.Gameplay.GameStart.IsPressed();
+            bool isPressed = controls.Gameplay.GameStart.WasPerformedThisFrame();
             if (isPressed)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 Reset();
             }
+        }
+        if (GameUIData.Instance.GetNumberOfBricks() == 0)
+        {
+            GameOver();
         }
     }
 
@@ -235,13 +182,26 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
-        m_GameOver = true;
+        //ToDo: Display Win Message
+        //ToDo: goText is null sometimes
+        Ball.Instance.StopBall();
         //stop the ball
         SaveAllData();
-        //ToDo: Count remaing bricks and see if won or lost
-        Text goText = GameOverText.GetComponent<Text>();
-        goText.text = "Game Over " + playerName;
-        GameOverText.SetActive(true);
+        //ToDo: need to attach to canvas?
+        //goTextPrefab = Instantiate(gameOverTextPrefab);
+        Text goText = gameOverText.GetComponent<Text>();
+        if (goText != null)
+        {
+            goText.text = "Game Over " + playerName+ "!";
+            if (GameUIData.Instance.GetNumberOfBricks() == 0)
+            {
+                goText.text += " You Won!";
+            }
+            //ToDo: Create textfield on GUI for this
+            goText.text += "\n\nPress Space to Restart";
+            gameOverText.SetActive(true);
+        }
+        m_GameOver = true;
     }
     [System.Serializable]
     class SaveData
@@ -255,12 +215,12 @@ public class MainManager : MonoBehaviour
         if (MenuManager.Instance.usePlayerPreferences)
         {
             // Add level color MenuManager.Instance.CurrentLevel
-            PlayerPrefs.SetString("playerWithBestScore" + "_" + MenuManager.Instance.CurrentLevel, playerWithBestScore);
-            PlayerPrefs.SetInt("bestScore" + "_" + MenuManager.Instance.CurrentLevel, bestScore);
+            PlayerPrefs.SetString("playerWithBestScore" + "_" + GameUIData.Instance.CurrentLevel, playerWithBestScore);
+            PlayerPrefs.SetInt("bestScore" + "_" + GameUIData.Instance.CurrentLevel, bestScore);
         }
         else
         {
-            SaveData data = new SaveData
+            SaveData data = new()
             {
                 playerName = playerName,
                 bestScore = bestScore,
@@ -277,8 +237,8 @@ public class MainManager : MonoBehaviour
         if (MenuManager.Instance.usePlayerPreferences)
         {
             playerName = PlayerPrefs.GetString("playerName");
-            playerWithBestScore = PlayerPrefs.GetString("playerWithBestScore" + "_" + MenuManager.Instance.CurrentLevel);
-            bestScore = PlayerPrefs.GetInt("bestScore" + "_" + MenuManager.Instance.CurrentLevel);
+            playerWithBestScore = PlayerPrefs.GetString("playerWithBestScore" + "_" + GameUIData.Instance.CurrentLevel);
+            bestScore = PlayerPrefs.GetInt("bestScore" + "_" + GameUIData.Instance.CurrentLevel);
         }
         else
         {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using UnityEngine.UI;
+using System.Reflection.Emit;
 
 [DefaultExecutionOrder(1000)]
 public class MenuManager : MonoBehaviour
@@ -20,19 +21,16 @@ public class MenuManager : MonoBehaviour
     public TMP_InputField nameInputField;
     public static MenuManager Instance;
     public static GameObject MenuCanvas;
-    //public MenuManager Instance;
     public List<string> previousPlayers = new();
     public TMP_Dropdown previousPlayersDropdown;
     [UnityEngine.Range(1, 30)]
     public int maxSavedPreviousPlayers = 20;
     public bool usePlayerPreferences = true;
-    public string CurrentLevel = "Green";
     public ToggleGroup levelToggleGroup;
     public void Awake()
     {
         //Debug.Log("MenuManager gameObject.name: " + gameObject.name);
 
-        //start of new code
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -40,12 +38,10 @@ public class MenuManager : MonoBehaviour
             LoadAllData();
             return;
         }
-        //end of new code
 
         Instance = this;
         MenuCanvas = this.gameObject;
 
-        //DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(Instance); // same as GameObject
 
         LoadAllData();
@@ -59,18 +55,30 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Awake nameInputField is null");
+            Debug.LogError("Awake nameInputField is null");
         }
-        //levelToggleGroup = GetParent<ToggleGroup>();
         if (levelToggleGroup == null)
         {
             Debug.LogError("ToggleGroup is not assigned!");
         }
     }
+    public void Start()
+    {
+        for (int i = 0; i < GameUIData.Instance.gameLevelData.Length; i++)
+        {
+            // Set label text
+            Transform labelTransform = GameUIData.Instance.gameLevelData[i].levelToggle.transform.Find("Label");
+            Text labelText = labelTransform.GetComponent<Text>();
+            labelText.text = GameUIData.Instance.gameLevelData[i].name;
+
+        }
+        SetCurrentLevel();
+    }
     public void AssignPreviousPlayer()
     {
         playerName = previousPlayers.ElementAt(previousPlayersDropdown.value);
-        //Debug.Log("Chosen Name:" + playerName);
+        //       Debug.Log("Current Name:" + nameInputField.text);
+        //       Debug.Log("Chosen Name:" + playerName);
         nameInputField.text = playerName;
     }
     public void SavePlayer()
@@ -106,11 +114,6 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
     public void Exit()
     {
         MenuManager.Instance.SaveAllData();
@@ -166,7 +169,7 @@ public class MenuManager : MonoBehaviour
                 SaveData data = JsonUtility.FromJson<SaveData>(json);
                 playerName = data.playerName;
                 previousPlayers = data.previousPlayers;
-             }
+            }
         }
     }
     public void LoadAllPreferences()
@@ -186,10 +189,7 @@ public class MenuManager : MonoBehaviour
         Toggle toggle = levelToggleGroup.ActiveToggles().FirstOrDefault();
         if (toggle.isOn)
         {
-            //string level;
-            CurrentLevel = toggle.GetComponentInChildren<Text>().text.Trim();
-            //Debug.Log($"Setting current level to: {CurrentLevel}\n");
-
+            GameUIData.Instance.CurrentLevel = toggle.GetComponentInChildren<Text>().text.Trim();
         }
     }
 }

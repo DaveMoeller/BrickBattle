@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6457873181139428386}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,12 +168,12 @@ GameObject:
   - component: {fileID: 5394040266873869938}
   - component: {fileID: 2363219417721782746}
   m_Layer: 0
-  m_Name: Paddle
-  m_TagString: Untagged
+  m_Name: PaddleX
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8074606786096607570
 Transform:
   m_ObjectHideFlags: 0
@@ -309,12 +309,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 4
   MaxMovement: 2
-  moveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 0252f415-303f-41f7-b865-4cf6230e7aae
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
