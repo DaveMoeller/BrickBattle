@@ -51,8 +51,6 @@ public class Brick : MonoBehaviour
         {
             var main = emitter.main;
             main.startColor = materials[0].color;
-            //main.SetColor("_BaseColor", materialsBrick[0].color);
-            //Debug.Log($"main.startColor:{main.startColor}");
             // Get the Particle System's Renderer
             ParticleSystemRenderer psr = emitter.GetComponent<ParticleSystemRenderer>();
             psr.SetMaterials(materials);

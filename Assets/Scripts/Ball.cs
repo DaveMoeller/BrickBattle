@@ -35,15 +35,9 @@ public class Ball : MonoBehaviour
     {
         var velocity = m_Rigidbody.linearVelocity;
         // Count bricks and stop ball if no more
-        //GameObject[] foundObjects;
-        //foundObjects = GameObject.FindGameObjectsWithTag("Brick");
         if (GameUIData.Instance.GetNumberOfBricks() <= 0)
         {
             MainManager.Instance.GameOver();
-            //StopBall();
-            // Display "You Won <name>"
-            //Debug.Log("You Won!");
-            //MainManager.Instance.GameOver();
         }
         else
         {
@@ -56,13 +50,13 @@ public class Ball : MonoBehaviour
             float dot = Vector2.Dot(velocity.normalized, Vector2.up);
             //Debug.Log($"velocity.normalized:{velocity.normalized}");
             //Debug.Log($"dot:{dot}");
-            if ((dot>.99f)||(dot < -0.99f))
+            if ((dot > .99f) || (dot < -0.99f))
             {
-                velocity.x = UnityEngine.Random.Range(-.5f,.5f);
+                velocity.x = UnityEngine.Random.Range(-.5f, .5f);
                 //velocity = velocity;
                 //Debug.Log($"new x velocity:{velocity}");
             }
-            if ((dot > -.01f) && (dot <0.01f))
+            if ((dot > -.01f) && (dot < 0.01f))
             {
                 velocity.y = UnityEngine.Random.Range(-.5f, .5f);
                 //velocity = velocity;

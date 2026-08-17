@@ -37,6 +37,7 @@ public class MainManager : MonoBehaviour
     private static PlayerControls controls; // Reference to the generated class
     public PlayerControls PlayerControlsShared { get { return controls; } }
     private GameObject goTextPrefab;
+    private bool gameOverCalled = false;
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
@@ -52,6 +53,7 @@ public class MainManager : MonoBehaviour
         //Debug.Log("MainManager gameObject.name: " + gameObject.name);
         if (Instance != null)
         {
+            gameOverCalled = false;
             return;
         }
         else
@@ -80,7 +82,7 @@ public class MainManager : MonoBehaviour
         int perLine = Mathf.FloorToInt(4.0f / step);
         float randomRangeLow = 0.0f;
         float randomRangeHigh = 1.0f;
-
+        gameOverCalled = false;
         LoadAllData();
         ScoreText.text = playerName + $" Score : {m_Points}";
         bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
@@ -110,6 +112,7 @@ public class MainManager : MonoBehaviour
         //Set score title color
         bestScoreText.color = titleColor;
         ScoreText.color = titleColor;
+        GameUIData.Instance.ResetBrickCount();
         for (int i = 0; i < LineCount; ++i)
         {
             for (int x = 0; x < perLine; ++x)
@@ -136,15 +139,25 @@ public class MainManager : MonoBehaviour
     {
         if (!m_Started)
         {
-            bool isPressed = controls.Gameplay.GameStart.IsPressed();
-            if (isPressed && (ballRB != null))
+            bool isPressed = controls.Gameplay.GameStart.WasPerformedThisFrame();
+            //&& (ballRB != null)
+            if (isPressed)
             {
                 m_Started = true;
-                float randomDirection = Random.Range(-1.0f, 1.0f);
-                Vector3 forceDir = new(randomDirection, 1, 0);
-                forceDir.Normalize();
-                ballRB.transform.SetParent(null);
-                ballRB.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+                if (ballRB != null)
+                {
+                    float randomDirection = Random.Range(-1.0f, 1.0f);
+                    Vector3 forceDir = new(randomDirection, 1, 0);
+                    forceDir.Normalize();
+                    ballRB.transform.SetParent(null);
+                    ballRB.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+
+                }
+                else
+                {
+                    //ballRB is null until the scene is fully rebuilt. Ignore issue
+                    //Debug.LogError("ballRB is null!");
+                }
             }
         }
         else if (m_GameOver)
@@ -155,10 +168,6 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 Reset();
             }
-        }
-        if (GameUIData.Instance.GetNumberOfBricks() == 0)
-        {
-            GameOver();
         }
     }
 
@@ -177,26 +186,35 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
-        //ToDo: Display Win Message
-        //ToDo: goText is null sometimes
+        if (gameOverCalled) return;
+        gameOverCalled = true;
         Ball.Instance.StopBall();
-        //stop the ball
         SaveAllData();
-        //ToDo: need to attach to canvas?
-        //goTextPrefab = Instantiate(gameOverTextPrefab);
-        Text goText = gameOverText.GetComponent<Text>();
-        if (goText != null)
+        gameOverText = GameObject.Find("GameoverText");
+        gameOverText.SetActive(true);
+        if (gameOverText != null)
         {
-            goText.text = "Game Over " + playerName+ "!";
-            if (GameUIData.Instance.GetNumberOfBricks() == 0)
+            if (gameOverText.TryGetComponent<Text>(out Text goText))
             {
-                goText.text += " You Won!";
+                if (goText != null)
+                {
+                    goText.text = "Game Over " + playerName + "!";
+                    if (GameUIData.Instance.GetNumberOfBricks() == 0)
+                    {
+                        goText.text += " You Won!";
+                    }
+                    goText.text += "\n\nPress Space to Restart!";
+                    goText.enabled = true;
+                }
             }
-            //ToDo: Create textfield on GUI for this
-            goText.text += "\n\nPress Space to Restart";
-            gameOverText.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("gameOverText is null!");
         }
         m_GameOver = true;
+        //m_Started = false;
+        GameUIData.Instance.ResetBrickCount();
     }
     [System.Serializable]
     class SaveData

@@ -15,21 +15,33 @@ public class GameUIData : MonoBehaviour
     {
         return gameDictionary[level];
     }
+    public void ResetBrickCount()
+    {
+        numberOfBricks = 0;
+        //Debug.Log($"ResetBrickCount.numberOfBricks:{numberOfBricks:00}");
+    }
     public void AddBrick()
     {
-        numberOfBricks++;
+        numberOfBricks += 1;
+        //Debug.Log($"AddBrick.numberOfBricks: {numberOfBricks:00}");
     }
     public void RemoveBrick()
     {
-        numberOfBricks--;
+        numberOfBricks -= 1;
+        //Debug.Log($"RemoveBrick.numberOfBricks: {numberOfBricks:00}");
     }
-    public int GetNumberOfBricks() { return numberOfBricks; }
+    public int GetNumberOfBricks()
+    {
+        //Debug.Log($"GetNumberOfBricks.numberOfBricks: {numberOfBricks:00}");
+        return numberOfBricks;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (Instance != null)
         {
+            //ResetBrickCount();
             return;
         }
         else
@@ -44,6 +56,7 @@ public class GameUIData : MonoBehaviour
             //Set defaults
             CurrentLevel = gameLevelData[0].name;
             gameLevel = 0;
+            ResetBrickCount();
             // set up dictionary
             for (int i = 0; i < gameLevelData.Length; i++)
             {
