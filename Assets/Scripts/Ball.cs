@@ -37,7 +37,7 @@ public class Ball : MonoBehaviour
         // Count bricks and stop ball if no more
         //GameObject[] foundObjects;
         //foundObjects = GameObject.FindGameObjectsWithTag("Brick");
-        if (GameUIData.Instance.GetNumberOfBricks() == 0)
+        if (GameUIData.Instance.GetNumberOfBricks() <= 0)
         {
             MainManager.Instance.GameOver();
             //StopBall();
