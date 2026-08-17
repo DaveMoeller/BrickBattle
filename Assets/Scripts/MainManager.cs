@@ -1,13 +1,8 @@
 // Data Persistence
-using JetBrains.Annotations;
-using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {

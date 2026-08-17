@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
-using static Unity.Collections.AllocatorManager;
 [RequireComponent(typeof(ParticleSystem))]
 
 [RequireComponent(typeof(MeshRenderer))]
