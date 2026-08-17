@@ -83,6 +83,5 @@ public class Ball : MonoBehaviour
         // StopBall
         var velocity = new Vector3(0, 0, 0);
         m_Rigidbody.linearVelocity = velocity;
-
     }
 }

@@ -250,7 +250,6 @@ MonoBehaviour:
   bestScoreText: {fileID: 2078529056}
   gameOverText: {fileID: 474497238}
   gameOverTextPrefab: {fileID: 7958812007214260467, guid: 06bab496cc1f3514988131f9c07a34c1, type: 3}
-  mainCanvas: {fileID: 2137539494}
   playerName: New
   saveFile: /savefile.json
   bestScore: 0
@@ -858,7 +857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee19acfba77e9084fb4ce7ee7ff9e3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Manager: {fileID: 450625942}
 --- !u!1 &1237570669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1668,7 +1666,7 @@ PrefabInstance:
       propertyPath: m_Text
       value: 'GAME OVER!
 
-        Press Space to Restart'
+        Press Space to Restart!'
       objectReference: {fileID: 0}
     - target: {fileID: 7781968782130408294, guid: 06bab496cc1f3514988131f9c07a34c1, type: 3}
       propertyPath: m_Pivot.x
@@ -1756,7 +1754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7958812007214260467, guid: 06bab496cc1f3514988131f9c07a34c1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
