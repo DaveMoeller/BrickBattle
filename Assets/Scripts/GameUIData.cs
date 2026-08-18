@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 public enum GAME_LEVELS { Green, Purple, Chocolate, Blue, Silver, Gold };
@@ -39,6 +41,8 @@ public class GameUIData : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        int numberOfGameLevels;
+        numberOfGameLevels = Enum.GetNames(typeof(GAME_LEVELS)).Length;
         if (Instance != null)
         {
             //ResetBrickCount();
@@ -46,10 +50,15 @@ public class GameUIData : MonoBehaviour
         }
         else
         {
-            if (gameLevelData.Length != 6)
+            if (gameLevelData.Length != numberOfGameLevels)
             {
-                Debug.LogError("There needs to be 6 gameLevelData elements defined!");
-                return;
+                Debug.LogError($"There needs to be {numberOfGameLevels} gameLevelData elements defined!");
+#if UNITY_EDITOR
+                EditorApplication.ExitPlaymode();
+#else
+                Application.Quit();
+#endif
+                //return;
             }
             Instance = this;
             DontDestroyOnLoad(Instance);
