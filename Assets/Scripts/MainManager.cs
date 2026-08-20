@@ -34,6 +34,12 @@ public class MainManager : MonoBehaviour
     //Colors
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
+    [Tooltip("Object to constrain min X movement.")]
+    public GameObject borderLeft;
+    private float minX;
+    [Tooltip("Object to constrain max X movement.")]
+    private float maxX;
+    public GameObject borderRight;
     private static PlayerControls controls; // Reference to the generated class
     public PlayerControls PlayerControlsShared { get { return controls; } }
     private GameObject goTextPrefab;
@@ -133,8 +139,20 @@ public class MainManager : MonoBehaviour
                 GameUIData.Instance.AddBrick();
             }
         }
-
+        //Calculate Min and Max X
+        CalculateConstraints();
     }
+    private void CalculateConstraints()
+    {
+        minX = (borderLeft.transform.position.x + (borderLeft.transform.localScale.x/2))
+            + (paddlePrefab.transform.localScale.x / 2);
+        //Debug.Log($"minX= {minX}");
+        maxX = (borderRight.transform.position.x - (borderRight.transform.localScale.x / 2))
+             - (paddlePrefab.transform.localScale.x / 2);
+        //Debug.Log($"maxX= {maxX}");
+    }
+    public float GetMinX() { return minX; }
+    public float GetMaxX() { return maxX; }
     private void Update()
     {
         if (!m_Started)
