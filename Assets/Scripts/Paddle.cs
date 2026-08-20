@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class Paddle : MonoBehaviour
 {
     public float Speed = 2.0f;
-    public float MaxMovement = 2.0f;
-    //private Ball ball;
+    float minX;
+    float maxX;
     // Start is called before the first frame update
 
     void Start()
@@ -31,6 +32,8 @@ public class Paddle : MonoBehaviour
                 Debug.LogError("MainManager.Instance is null");
             }
         }
+        minX = MainManager.Instance.GetMinX();
+        maxX = MainManager.Instance.GetMaxX();
     }
 
     // Update is called once per frame
@@ -43,11 +46,11 @@ public class Paddle : MonoBehaviour
             //Debug.Log("Direct Left arrow key is held down");
             Vector3 pos = transform.position;
             pos.x += (-1) * Speed * Time.deltaTime;
-            if (pos.x < -MaxMovement)
-                pos.x = -MaxMovement;
-
+            if (pos.x < minX)
+            {
+                pos.x = minX;
+            }
             transform.position = pos;
-
         }
         //bool RightDirectionIsPressed = Keyboard.current[Key.RightArrow].isPressed;
         bool RightDirectionIsPressed = MainManager.Instance.PlayerControlsShared.Gameplay.MoveRight.IsPressed();
@@ -56,11 +59,11 @@ public class Paddle : MonoBehaviour
             //Debug.Log("Direct Right arrow key is held down");
             Vector3 pos = transform.position;
             pos.x += (1) * Speed * Time.deltaTime;
-            if (pos.x > MaxMovement)
-                pos.x = MaxMovement;
-
+            if (pos.x > maxX)
+            {
+                pos.x = maxX;
+            }
             transform.position = pos;
-
         }
     }
 }
