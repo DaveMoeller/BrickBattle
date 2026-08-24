@@ -259,6 +259,8 @@ MonoBehaviour:
   titleColor: {r: 0, g: 1, b: 0, a: 1}
   borderLeft: {fileID: 1288645155}
   borderRight: {fileID: 850602367}
+  borderBottom: {fileID: 1066359099}
+  borderTop: {fileID: 1634186524}
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class Paddle : MonoBehaviour
     public float Speed = 2.0f;
     float minX;
     float maxX;
+    float minY;
+    float maxY;
     // Start is called before the first frame update
 
     void Start()
@@ -34,6 +36,8 @@ public class Paddle : MonoBehaviour
         }
         minX = MainManager.Instance.GetMinX();
         maxX = MainManager.Instance.GetMaxX();
+        minY = MainManager.Instance.GetMinY();
+        maxY = MainManager.Instance.GetMaxY();
     }
 
     // Update is called once per frame
@@ -62,6 +66,30 @@ public class Paddle : MonoBehaviour
             if (pos.x > maxX)
             {
                 pos.x = maxX;
+            }
+            transform.position = pos;
+        }
+        bool UpDirectionIsPressed = MainManager.Instance.PlayerControlsShared.Gameplay.MoveUp.IsPressed();
+        if (UpDirectionIsPressed)
+        {
+            //Debug.Log("Direct Up arrow key is held down");
+            Vector3 pos = transform.position;
+            pos.y += (1) * Speed * Time.deltaTime;
+            if (pos.y > maxY)
+            {
+                pos.y = maxY;
+            }
+            transform.position = pos;
+        }
+        bool DownDirectionIsPressed = MainManager.Instance.PlayerControlsShared.Gameplay.MoveDown.IsPressed();
+        if (DownDirectionIsPressed)
+        {
+            //Debug.Log("Direct Up arrow key is held down");
+            Vector3 pos = transform.position;
+            pos.y -= (1) * Speed * Time.deltaTime;
+            if (pos.y < minY)
+            {
+                pos.y = minY;
             }
             transform.position = pos;
         }

@@ -40,6 +40,13 @@ public class MainManager : MonoBehaviour
     [Tooltip("Object to constrain max X movement.")]
     private float maxX;
     public GameObject borderRight;
+    [Tooltip("Object to constrain min Y movement (DeathZone).")]
+    public GameObject borderBottom; //deathZone
+    private float minY;
+    [Tooltip("Object to constrain max Y movement.")]
+    private float maxY;
+    public GameObject borderTop;
+    private float yBuffer = 0.2f;
     private static PlayerControls controls; // Reference to the generated class
     public PlayerControls PlayerControlsShared { get { return controls; } }
     private GameObject goTextPrefab;
@@ -100,9 +107,9 @@ public class MainManager : MonoBehaviour
         {
             playerName = "Player 01";
         }
-        //ToDo: Instantiate the paddle
+        // Instantiate the paddle
         var paddle = Instantiate(paddlePrefab);
-        //ToDo: Instantiate the ball
+        // Instantiate the ball
         var ball = Instantiate(ballPrefab);
         ballRB = ball.GetComponent<Rigidbody>();
         //
@@ -150,9 +157,16 @@ public class MainManager : MonoBehaviour
         maxX = (borderRight.transform.position.x - (borderRight.transform.localScale.x / 2))
              - (paddlePrefab.transform.localScale.x / 2);
         //Debug.Log($"maxX= {maxX}");
+        minY = (borderBottom.transform.position.y + (borderBottom.transform.localScale.y / 2))
+         + yBuffer;
+        //Debug.Log($"minX= {minX}");
+        maxY = (borderTop.transform.position.y - (borderTop.transform.localScale.y / 2))
+             - yBuffer;
     }
     public float GetMinX() { return minX; }
     public float GetMaxX() { return maxX; }
+    public float GetMinY() { return minY; }
+    public float GetMaxY() { return maxY; }
     private void Update()
     {
         if (!m_Started)
