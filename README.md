@@ -3,7 +3,7 @@ Basic brick battle game with levels of difficulty.
 ## Keys
 The following are navigation keys:
 
-- Left and right
+- Movement
 	* a/d Keys
-	* Left, Right Arrow Keys
-	* Left/Right Mouse Buttons
+	* Left, Right, Up, and Down Arrow Keys
+	* Left, Right, Forward, and Back Mouse Buttons
