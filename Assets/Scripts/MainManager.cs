@@ -81,6 +81,15 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // If starting in game go to menu. Game data is null
+        if (GameUIData.Instance == null)
+        {
+            //Debug.LogError("Start the game from the menu scene!");
+            
+            SceneManager.LoadScene(0);
+            Destroy(Instance);
+            return;
+        }
         Setup();
     }
     private void Reset()
@@ -151,7 +160,7 @@ public class MainManager : MonoBehaviour
     }
     private void CalculateConstraints()
     {
-        minX = (borderLeft.transform.position.x + (borderLeft.transform.localScale.x/2))
+        minX = (borderLeft.transform.position.x + (borderLeft.transform.localScale.x / 2))
             + (paddlePrefab.transform.localScale.x / 2);
         //Debug.Log($"minX= {minX}");
         maxX = (borderRight.transform.position.x - (borderRight.transform.localScale.x / 2))
