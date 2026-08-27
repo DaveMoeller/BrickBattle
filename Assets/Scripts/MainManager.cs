@@ -85,7 +85,7 @@ public class MainManager : MonoBehaviour
         if (GameUIData.Instance == null)
         {
             //Debug.LogError("Start the game from the menu scene!");
-            
+
             SceneManager.LoadScene(0);
             Destroy(Instance);
             return;
@@ -229,7 +229,16 @@ public class MainManager : MonoBehaviour
     {
         if (gameOverCalled) return;
         gameOverCalled = true;
-        Ball.Instance.StopBall();
+        if (Ball.Instance != null)
+        {
+            Ball.Instance.StopBall();
+        }
+        EnemyDeath[] enemyDeath = GameObject.FindObjectsByType<EnemyDeath>();
+        foreach (EnemyDeath enemy in enemyDeath)
+        {
+            Destroy(enemy.gameObject);
+        }
+
         SaveAllData();
         gameOverText = GameObject.Find("GameoverText");
         gameOverText.SetActive(true);
