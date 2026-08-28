@@ -153,6 +153,22 @@ public class MainManager : MonoBehaviour
                 brickScript.PointValue = brickScript.row * pointMutiplier;
                 brickScript.onDestroyed.AddListener(AddPoint);
                 GameUIData.Instance.AddBrick();
+                //ToDo: Set text to show point value
+                //Get Canvas
+                //Get Text
+                Transform myCanvas = brick.transform.Find("Canvas");
+                if (myCanvas != null)
+                {
+                    Transform myText = myCanvas.transform.Find("Text");
+                    if (myText != null)
+                    {
+                        if (myText.TryGetComponent<TMPro.TextMeshProUGUI>(out var tmpText))
+                        {
+                            tmpText.text = $"{brickScript.PointValue:000}";
+                        }
+                    }
+                    //ToDo: Set text color to be same as brick
+                }
             }
         }
         //Calculate Min and Max X

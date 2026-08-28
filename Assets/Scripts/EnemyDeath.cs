@@ -92,17 +92,13 @@ public class EnemyDeath : MonoBehaviour
             }
             if (transform.position.y < minY)
             {
-                yDirMin= 0.0f;
-                yDirMax= 1.0f;
+                yDirMin = 0.0f;
+                yDirMax = 1.0f;
             }
-            //dir = new Vector3(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 0.0f).normalized;
-            //ToDo: Need to offset by current velocity
+            // Stop and adjust direction and velocity
             dir = new Vector3(Random.Range(xDirMin, xDirMax), Random.Range(yDirMin, yDirMax), 0.0f).normalized;
             Debug.Log($"dir (changed): {dir}");
             rb.linearVelocity = Vector3.zero;
-            //* Time.deltaTime
-            //rb.AddForce(speed * dir, ForceMode.VelocityChange);
-
         }
         //If paddle
         //If ball
