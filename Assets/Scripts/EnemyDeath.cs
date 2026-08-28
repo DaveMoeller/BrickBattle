@@ -106,13 +106,13 @@ public class EnemyDeath : MonoBehaviour
         {
             if (other.TryGetComponent<Paddle>(out Paddle hitPaddle))
             {
-                int pointsToAdd = - Random.Range(pointsToAddToScoreRangeLow, pointsToAddToScoreRangeHigh);
+                int pointsToAdd = -Random.Range(pointsToAddToScoreRangeLow, pointsToAddToScoreRangeHigh);
                 Debug.Log("Hit a Paddle! Score value is: " + MainManager.Instance.GetScore());
                 Debug.Log($"Adding {pointsToAdd} points to score");
                 MainManager.Instance.AddPoint(pointsToAdd);
                 Debug.Log("New Score value is: " + MainManager.Instance.GetScore());
+                //ToDo: add particle system
             }
-
         }
         //ToDo: If ball add ring around it and make rigid body/collision area bigger
         // If Brick
@@ -124,6 +124,7 @@ public class EnemyDeath : MonoBehaviour
                 Debug.Log("Hit a brick! Its point value is: " + hitBrick.GetPoints());
                 Debug.Log($"Adding {pointsToAdd} points to brick");
                 hitBrick.AddPoints(pointsToAdd);
+                //ToDo: add particle system
             }
 
         }
