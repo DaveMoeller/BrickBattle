@@ -1670,10 +1670,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyDeath
       objectReference: {fileID: 0}
-    - target: {fileID: 4043871462364860041, guid: e19523ecc0641a347a3a15a6d391f956, type: 3}
-      propertyPath: speed
-      value: 0.16
-      objectReference: {fileID: 0}
     - target: {fileID: 8685826811653644174, guid: e19523ecc0641a347a3a15a6d391f956, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1713,10 +1709,6 @@ PrefabInstance:
     - target: {fileID: 8685826811653644174, guid: e19523ecc0641a347a3a15a6d391f956, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8743560895208854083, guid: e19523ecc0641a347a3a15a6d391f956, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

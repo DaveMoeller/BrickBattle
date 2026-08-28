@@ -11,6 +11,8 @@ public class EnemyDeath : MonoBehaviour
     [Range(.1f, 2.0f)]
     public float speed = .1f;
     Rigidbody rb;
+    public int pointsToAddToBrickRangeLow = 1;
+    public int pointsToAddToBrickRangeHigh = 100;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,11 +41,8 @@ public class EnemyDeath : MonoBehaviour
     private void FixedUpdate()
     {
         //Move
-        //transform.position += speed * Time.deltaTime * dir;
-        //rb.AddForce(speed * dir, ForceMode.VelocityChange);
         //Debug.Log($"Enemy Position: {transform.position}");
         Vector3 newVelocity = speed * Time.deltaTime * dir;
-        //ToDo: Add rotation
         rb.AddForce(newVelocity, ForceMode.VelocityChange);
 
     }
@@ -100,8 +99,20 @@ public class EnemyDeath : MonoBehaviour
             Debug.Log($"dir (changed): {dir}");
             rb.linearVelocity = Vector3.zero;
         }
-        //If paddle
-        //If ball
+        //ToDo: If paddle add negative score
+        //ToDo: If ball add ring around it and make rigid body/collision area bigger
+        // If Brick
+        if (other.gameObject.CompareTag("Brick"))
+        {
+            if (other.TryGetComponent<Brick>(out Brick hitBrick))
+            {
+                int pointsToAdd = Random.Range(pointsToAddToBrickRangeLow, pointsToAddToBrickRangeHigh);
+                Debug.Log("Hit a brick! Its point value is: " + hitBrick.GetPoints());
+                Debug.Log($"Adding {pointsToAdd} points to brick");
+                hitBrick.AddPoints(pointsToAdd);
+            }
+
+        }
 
     }
     public void StopEnemy()

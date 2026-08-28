@@ -57,4 +57,36 @@ public class Brick : MonoBehaviour
 
         }
     }
+    public void AddPoints(int points)
+    {
+        Brick brickScript = GetComponent<Brick>();
+        brickScript.PointValue += points;
+        SetTextOnBrick($"{brickScript.PointValue:000}");
+        Debug.Log($"brick PointValue: {brickScript.PointValue}");
+        //Set the text
+
+    }
+    public void SetTextOnBrick(string newText)
+    {
+        Transform myCanvas = transform.Find("Canvas");
+        if (myCanvas != null)
+        {
+            Transform myText = myCanvas.transform.Find("Text");
+            if (myText != null)
+            {
+                if (myText.TryGetComponent<TMPro.TextMeshProUGUI>(out var tmpText))
+                {
+                    tmpText.text = newText;
+                }
+            }
+            //ToDo: Set text color to be same as brick
+        }
+
+    }
+    public int GetPoints()
+    {
+        Brick brickScript = GetComponent<Brick>();
+        Debug.Log($"brick PointValue: {brickScript.PointValue:000}");
+        return brickScript.PointValue;
+    }
 }

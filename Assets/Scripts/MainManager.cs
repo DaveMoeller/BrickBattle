@@ -153,6 +153,7 @@ public class MainManager : MonoBehaviour
                 brickScript.PointValue = brickScript.row * pointMutiplier;
                 brickScript.onDestroyed.AddListener(AddPoint);
                 GameUIData.Instance.AddBrick();
+                //ToDo: Use method in Brick
                 //ToDo: Set text to show point value
                 //Get Canvas
                 //Get Text
