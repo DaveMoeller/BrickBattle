@@ -13,6 +13,8 @@ public class EnemyDeath : MonoBehaviour
     Rigidbody rb;
     public int pointsToAddToBrickRangeLow = 1;
     public int pointsToAddToBrickRangeHigh = 100;
+    public int pointsToAddToScoreRangeLow = 1;
+    public int pointsToAddToScoreRangeHigh = 100;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -99,7 +101,19 @@ public class EnemyDeath : MonoBehaviour
             Debug.Log($"dir (changed): {dir}");
             rb.linearVelocity = Vector3.zero;
         }
-        //ToDo: If paddle add negative score
+        // If paddle add negative score
+        if (other.gameObject.CompareTag("Paddle"))
+        {
+            if (other.TryGetComponent<Paddle>(out Paddle hitPaddle))
+            {
+                int pointsToAdd = - Random.Range(pointsToAddToScoreRangeLow, pointsToAddToScoreRangeHigh);
+                Debug.Log("Hit a Paddle! Score value is: " + MainManager.Instance.GetScore());
+                Debug.Log($"Adding {pointsToAdd} points to score");
+                MainManager.Instance.AddPoint(pointsToAdd);
+                Debug.Log("New Score value is: " + MainManager.Instance.GetScore());
+            }
+
+        }
         //ToDo: If ball add ring around it and make rigid body/collision area bigger
         // If Brick
         if (other.gameObject.CompareTag("Brick"))

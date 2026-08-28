@@ -229,9 +229,11 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    void AddPoint(int point)
+    public void AddPoint(int point)
     {
         m_Points += point;
+        // In case negative points
+        if (m_Points < 0) m_Points = 0;
         ScoreText.text = playerName + $" Score : {m_Points}";
         if (m_Points > bestScore)
         {
@@ -240,6 +242,11 @@ public class MainManager : MonoBehaviour
             //Best Score : Player Name : 0
             bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
         }
+    }
+
+    public int GetScore()
+    {
+        return m_Points;
     }
 
     public void GameOver()
