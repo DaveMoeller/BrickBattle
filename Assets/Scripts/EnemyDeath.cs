@@ -112,6 +112,8 @@ public class EnemyDeath : MonoBehaviour
                 MainManager.Instance.AddPoint(pointsToAdd);
                 Debug.Log("New Score value is: " + MainManager.Instance.GetScore());
                 //ToDo: add particle system
+                //ToDo: turn on PS
+                hitPaddle.PlayParticleSystem();
             }
         }
         //ToDo: If ball add ring around it and make rigid body/collision area bigger
