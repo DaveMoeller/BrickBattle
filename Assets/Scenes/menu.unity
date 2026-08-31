@@ -4808,6 +4808,7 @@ MonoBehaviour:
     paddleSpeed: 3.3
     ballVelocity: 1.66
     ballVelocityMax: 2.5
+    numberOfEnemies: 1
   - name: Easy Peezie
     gameLevel: 1
     levelPoints: 20
@@ -4818,6 +4819,7 @@ MonoBehaviour:
     paddleSpeed: 3
     ballVelocity: 0.7
     ballVelocityMax: 3
+    numberOfEnemies: 2
   - name: Bouncy
     gameLevel: 2
     levelPoints: 30
@@ -4828,6 +4830,7 @@ MonoBehaviour:
     paddleSpeed: 3
     ballVelocity: 0.75
     ballVelocityMax: 3
+    numberOfEnemies: 3
   - name: I can do this
     gameLevel: 3
     levelPoints: 40
@@ -4838,6 +4841,7 @@ MonoBehaviour:
     paddleSpeed: 3.5
     ballVelocity: 0.8
     ballVelocityMax: 3.65
+    numberOfEnemies: 4
   - name: Experienced
     gameLevel: 4
     levelPoints: 50
@@ -4848,6 +4852,7 @@ MonoBehaviour:
     paddleSpeed: 4
     ballVelocity: 1
     ballVelocityMax: 4.41
+    numberOfEnemies: 5
   - name: Golden
     gameLevel: 5
     levelPoints: 60
@@ -4858,6 +4863,7 @@ MonoBehaviour:
     paddleSpeed: 5
     ballVelocity: 1.5
     ballVelocityMax: 5
+    numberOfEnemies: 6
 --- !u!4 &1690898399
 Transform:
   m_ObjectHideFlags: 0

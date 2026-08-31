@@ -261,6 +261,7 @@ MonoBehaviour:
   borderRight: {fileID: 850602367}
   borderBottom: {fileID: 1066359099}
   borderTop: {fileID: 1634186524}
+  enemyPrefab: {fileID: 29882573874415985, guid: e19523ecc0641a347a3a15a6d391f956, type: 3}
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,6 +1670,10 @@ PrefabInstance:
     - target: {fileID: 29882573874415985, guid: e19523ecc0641a347a3a15a6d391f956, type: 3}
       propertyPath: m_Name
       value: EnemyDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 29882573874415985, guid: e19523ecc0641a347a3a15a6d391f956, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8685826811653644174, guid: e19523ecc0641a347a3a15a6d391f956, type: 3}
       propertyPath: m_LocalPosition.x

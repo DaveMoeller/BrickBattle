@@ -1,5 +1,6 @@
 // Data Persistence
 using System.IO;
+//using System.Numerics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -51,6 +52,7 @@ public class MainManager : MonoBehaviour
     public PlayerControls PlayerControlsShared { get { return controls; } }
     private GameObject goTextPrefab;
     private bool gameOverCalled = false;
+    public GameObject enemyPrefab;
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
@@ -174,6 +176,15 @@ public class MainManager : MonoBehaviour
         }
         //Calculate Min and Max X
         CalculateConstraints();
+        //Create enemies based on level
+
+        for (int i = 0; i < levelData.numberOfEnemies; i++)
+        {
+            //Get random x and y
+            //UnityEngine.Vector3 loc = new UnityEngine.Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 0);
+            //_ = Instantiate(enemyPrefab, loc,UnityEngine.Quaternion.identity);
+            _ = Instantiate(enemyPrefab);
+        }
     }
     private void CalculateConstraints()
     {

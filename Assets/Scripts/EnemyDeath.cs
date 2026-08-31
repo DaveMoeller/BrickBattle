@@ -25,7 +25,8 @@ public class EnemyDeath : MonoBehaviour
         maxY = MainManager.Instance.GetMaxY();
         float startX = Random.Range(minX, maxX);
         float startY = Random.Range(minY, maxY);
-        dir = new Vector3(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 0.0f).normalized;
+        dir = new Vector3(startX, startY, 0.0f).normalized;
+        transform.position = dir;
         //Debug.Log($"dir: {dir}");
         //rb = GetComponent<Rigidbody>();
     }
