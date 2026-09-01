@@ -73,7 +73,7 @@ public class MainManager : MonoBehaviour
         {
             Instance = this;
             controls = new PlayerControls();
-            DontDestroyOnLoad(Instance); // same as GameObject
+            //DontDestroyOnLoad(Instance); // same as GameObject
         }
     }
 
@@ -89,10 +89,6 @@ public class MainManager : MonoBehaviour
             Destroy(Instance);
             return;
         }
-        Setup();
-    }
-    private void Reset()
-    {
         Setup();
     }
     void Setup()
@@ -237,7 +233,6 @@ public class MainManager : MonoBehaviour
             if (isPressed)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                Reset();
             }
         }
     }
