@@ -1,5 +1,6 @@
 // Data Persistence
 using System.IO;
+//using System.Numerics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -30,7 +31,6 @@ public class MainManager : MonoBehaviour
     public int bestScore = 0;
     public string playerWithBestScore = "";
     [Range(1, 10)]
-    public int pointMutiplier = 1;
     //Colors
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
@@ -46,11 +46,11 @@ public class MainManager : MonoBehaviour
     [Tooltip("Object to constrain max Y movement.")]
     private float maxY;
     public GameObject borderTop;
-    private float yBuffer = 0.2f;
+    private readonly float yBuffer = 0.2f;
     private static PlayerControls controls; // Reference to the generated class
     public PlayerControls PlayerControlsShared { get { return controls; } }
-    private GameObject goTextPrefab;
     private bool gameOverCalled = false;
+    public GameObject enemyPrefab;
     void OnEnable()
     {
         controls.Enable(); // Actions must be enabled
@@ -73,18 +73,22 @@ public class MainManager : MonoBehaviour
         {
             Instance = this;
             controls = new PlayerControls();
-            DontDestroyOnLoad(Instance); // same as GameObject
-
+            //DontDestroyOnLoad(Instance); // same as GameObject
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Setup();
-    }
-    private void Reset()
-    {
+        // If starting in game go to menu. Game data is null
+        if (GameUIData.Instance == null)
+        {
+            //Debug.LogError("Start the game from the menu scene!");
+
+            SceneManager.LoadScene(0);
+            Destroy(Instance);
+            return;
+        }
         Setup();
     }
     void Setup()
@@ -97,8 +101,15 @@ public class MainManager : MonoBehaviour
         float randomRangeHigh = 1.0f;
         gameOverCalled = false;
         LoadAllData();
-        ScoreText.text = playerName + $" Score : {m_Points}";
-        bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
+        if (ScoreText != null)
+        {
+            ScoreText.text = playerName + $" Score : {m_Points}";
+            bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
+        }
+        else
+        {
+            Debug.Log("ScoreText = null");
+        }
         if (MenuManager.Instance != null)
         {
             playerName = MenuManager.Instance.playerName;
@@ -113,12 +124,10 @@ public class MainManager : MonoBehaviour
         var ball = Instantiate(ballPrefab);
         ballRB = ball.GetComponent<Rigidbody>();
         //
-        //pointMutiplier = GameLevelData.Inst
         //Set the point multiplier
         GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
         //Debug.Log($"GameUIData.Instance.CurrentLevel: {GameUIData.Instance.CurrentLevel}");
-        pointMutiplier = levelData.levelPoints;
-        //Debug.Log($"pointMultiplier: {pointMutiplier}");
+        //Debug.Log($"pointMultiplier: {levelData.levelPoints}");
         randomRangeLow = levelData.randomRangeLow;
         randomRangeHigh = levelData.randomRangeHigh;
         titleColor = levelData.levelMaterial.color;
@@ -141,17 +150,43 @@ public class MainManager : MonoBehaviour
                 //first row i = 0 so add 1
                 Brick brickScript = brick.GetComponent<Brick>();
                 brickScript.row = i + 1;
-                brickScript.PointValue = brickScript.row * pointMutiplier;
+                brickScript.PointValue = brickScript.row * levelData.levelPoints;
                 brickScript.onDestroyed.AddListener(AddPoint);
                 GameUIData.Instance.AddBrick();
+                //ToDo: Use method in Brick
+                //ToDo: Set text to show point value
+                //Get Canvas
+                //Get Text
+                Transform myCanvas = brick.transform.Find("Canvas");
+                if (myCanvas != null)
+                {
+                    Transform myText = myCanvas.transform.Find("Text");
+                    if (myText != null)
+                    {
+                        if (myText.TryGetComponent<TMPro.TextMeshProUGUI>(out var tmpText))
+                        {
+                            tmpText.text = $"{brickScript.PointValue:000}";
+                        }
+                    }
+                    //ToDo: Set text color to be same as brick
+                }
             }
         }
         //Calculate Min and Max X
         CalculateConstraints();
+        //Create enemies based on level
+
+        for (int i = 0; i < levelData.numberOfEnemies; i++)
+        {
+            //Get random x and y
+            //UnityEngine.Vector3 loc = new UnityEngine.Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 0);
+            //_ = Instantiate(enemyPrefab, loc,UnityEngine.Quaternion.identity);
+            _ = Instantiate(enemyPrefab);
+        }
     }
     private void CalculateConstraints()
     {
-        minX = (borderLeft.transform.position.x + (borderLeft.transform.localScale.x/2))
+        minX = (borderLeft.transform.position.x + (borderLeft.transform.localScale.x / 2))
             + (paddlePrefab.transform.localScale.x / 2);
         //Debug.Log($"minX= {minX}");
         maxX = (borderRight.transform.position.x - (borderRight.transform.localScale.x / 2))
@@ -198,29 +233,47 @@ public class MainManager : MonoBehaviour
             if (isPressed)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                Reset();
             }
         }
     }
 
-    void AddPoint(int point)
+    public void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = playerName + $" Score : {m_Points}";
-        if (m_Points > bestScore)
+        // In case negative points
+        if (m_Points < 0) m_Points = 0;
+        if (ScoreText != null)
         {
-            bestScore = m_Points;
-            playerWithBestScore = playerName;
-            //Best Score : Player Name : 0
-            bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
+            ScoreText.text = playerName + $" Score : {m_Points}";
+            if (m_Points > bestScore)
+            {
+                bestScore = m_Points;
+                playerWithBestScore = playerName;
+                //Best Score : Player Name : 0
+                bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
+            }
         }
+    }
+
+    public int GetScore()
+    {
+        return m_Points;
     }
 
     public void GameOver()
     {
         if (gameOverCalled) return;
         gameOverCalled = true;
-        Ball.Instance.StopBall();
+        if (Ball.Instance != null)
+        {
+            Ball.Instance.StopBall();
+        }
+        EnemyDeath[] enemyDeath = GameObject.FindObjectsByType<EnemyDeath>();
+        foreach (EnemyDeath enemy in enemyDeath)
+        {
+            Destroy(enemy.gameObject);
+        }
+
         SaveAllData();
         gameOverText = GameObject.Find("GameoverText");
         gameOverText.SetActive(true);

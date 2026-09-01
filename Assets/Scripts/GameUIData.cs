@@ -11,7 +11,7 @@ public class GameUIData : MonoBehaviour
     public string CurrentLevel;
     public GAME_LEVELS gameLevel;
     public GameLevelData[] gameLevelData;
-    private Dictionary<string, GameLevelData> gameDictionary = new();
+    private readonly Dictionary<string, GameLevelData> gameDictionary = new();
     private int numberOfBricks = 0;
     public GameLevelData GetGameLevelData(string level)
     {
@@ -101,6 +101,10 @@ public struct GameLevelData
     public float ballVelocity;
     [Range(1.0f, 5.0f)]
     public float ballVelocityMax;
+    [Tooltip("Number of enemies")]
+    [Range(0, 10)]
+    public int numberOfEnemies;
+
     public GameLevelData(GAME_LEVELS level, Material material, Toggle toggle, int points = 1)
     {
         name = "Game Levels";
@@ -113,6 +117,7 @@ public struct GameLevelData
         paddleSpeed = 2.0f;
         ballVelocity = 0.6f;
         ballVelocityMax = 1.0f;
+        numberOfEnemies = 0;
     }
 }
 

@@ -94,4 +94,13 @@ public class Paddle : MonoBehaviour
             transform.position = pos;
         }
     }
+    public void PlayParticleSystem()
+    {
+        //ToDo: Finish Paddle PS, set color in start
+        if(TryGetComponent<ParticleSystem>(out ParticleSystem paddlePS))
+        {
+            //paddlePS.
+            paddlePS.Play();
+        }
+    }
 }
