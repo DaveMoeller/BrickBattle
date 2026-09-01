@@ -11,7 +11,7 @@ public class GameUIData : MonoBehaviour
     public string CurrentLevel;
     public GAME_LEVELS gameLevel;
     public GameLevelData[] gameLevelData;
-    private Dictionary<string, GameLevelData> gameDictionary = new();
+    private readonly Dictionary<string, GameLevelData> gameDictionary = new();
     private int numberOfBricks = 0;
     public GameLevelData GetGameLevelData(string level)
     {

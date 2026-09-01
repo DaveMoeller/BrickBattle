@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(Renderer))]
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Brick))]
 public class Brick : MonoBehaviour
 {
     public UnityEvent<int> onDestroyed;
@@ -62,7 +63,7 @@ public class Brick : MonoBehaviour
         Brick brickScript = GetComponent<Brick>();
         brickScript.PointValue += points;
         SetTextOnBrick($"{brickScript.PointValue:000}");
-        Debug.Log($"brick PointValue: {brickScript.PointValue}");
+        //Debug.Log($"brick PointValue: {brickScript.PointValue}");
         //Set the text
 
     }
@@ -86,7 +87,7 @@ public class Brick : MonoBehaviour
     public int GetPoints()
     {
         Brick brickScript = GetComponent<Brick>();
-        Debug.Log($"brick PointValue: {brickScript.PointValue:000}");
+        //Debug.Log($"brick PointValue: {brickScript.PointValue:000}");
         return brickScript.PointValue;
     }
 }

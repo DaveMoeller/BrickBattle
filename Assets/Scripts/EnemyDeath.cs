@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class EnemyDeath : MonoBehaviour
 {
     private Vector3 dir;
@@ -35,12 +36,6 @@ public class EnemyDeath : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.AddForce(speed * dir, ForceMode.VelocityChange);
     }
-    // Update is called once per frame
-    void Update()
-    {
-        //Move
-        //transform.position += speed * Time.deltaTime * dir;
-    }
     private void FixedUpdate()
     {
         //Move
@@ -49,25 +44,9 @@ public class EnemyDeath : MonoBehaviour
         rb.AddForce(newVelocity, ForceMode.VelocityChange);
 
     }
-    public void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log($"OnCollisionEnter: Enemy Collision with {collision.gameObject.name}, tag: {collision.gameObject.tag}");
-        //If border tag...
-        //Change direction
-        //If paddle
-        //If ball
-    }
-    public void OnCollisionExit(Collision collision)
-    {
-        Debug.Log($"OnCollisionExit: Enemy Collision with {collision.gameObject.name}, tag: {collision.gameObject.tag}");
-        //If border tag...
-        //Change direction
-        //If paddle
-        //If ball
-    }
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"OnTriggerEnter: Enemy Trigger Collision with {other.gameObject.name}, tag: {other.gameObject.tag}");
+        //Debug.Log($"OnTriggerEnter: Enemy Trigger Collision with {other.gameObject.name}, tag: {other.gameObject.tag}");
         //If border tag...
         if (other.gameObject.CompareTag("Border"))
         {
@@ -99,7 +78,7 @@ public class EnemyDeath : MonoBehaviour
             }
             // Stop and adjust direction and velocity
             dir = new Vector3(Random.Range(xDirMin, xDirMax), Random.Range(yDirMin, yDirMax), 0.0f).normalized;
-            Debug.Log($"dir (changed): {dir}");
+            //Debug.Log($"dir (changed): {dir}");
             rb.linearVelocity = Vector3.zero;
         }
         // If paddle add negative score
@@ -108,10 +87,10 @@ public class EnemyDeath : MonoBehaviour
             if (other.TryGetComponent<Paddle>(out Paddle hitPaddle))
             {
                 int pointsToAdd = -Random.Range(pointsToAddToScoreRangeLow, pointsToAddToScoreRangeHigh);
-                Debug.Log("Hit a Paddle! Score value is: " + MainManager.Instance.GetScore());
-                Debug.Log($"Adding {pointsToAdd} points to score");
+                //Debug.Log("Hit a Paddle! Score value is: " + MainManager.Instance.GetScore());
+                //Debug.Log($"Adding {pointsToAdd} points to score");
                 MainManager.Instance.AddPoint(pointsToAdd);
-                Debug.Log("New Score value is: " + MainManager.Instance.GetScore());
+                //Debug.Log("New Score value is: " + MainManager.Instance.GetScore());
                 //ToDo: add particle system
                 //ToDo: turn on PS
                 hitPaddle.PlayParticleSystem();
@@ -124,8 +103,8 @@ public class EnemyDeath : MonoBehaviour
             if (other.TryGetComponent<Brick>(out Brick hitBrick))
             {
                 int pointsToAdd = Random.Range(pointsToAddToBrickRangeLow, pointsToAddToBrickRangeHigh);
-                Debug.Log("Hit a brick! Its point value is: " + hitBrick.GetPoints());
-                Debug.Log($"Adding {pointsToAdd} points to brick");
+                //Debug.Log("Hit a brick! Its point value is: " + hitBrick.GetPoints());
+                //Debug.Log($"Adding {pointsToAdd} points to brick");
                 hitBrick.AddPoints(pointsToAdd);
                 //ToDo: add particle system
             }

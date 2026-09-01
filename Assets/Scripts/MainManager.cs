@@ -31,7 +31,6 @@ public class MainManager : MonoBehaviour
     public int bestScore = 0;
     public string playerWithBestScore = "";
     [Range(1, 10)]
-    public int pointMutiplier = 1;
     //Colors
     public Vector3 BallInitialTransform;
     public Color titleColor = Color.green;
@@ -47,10 +46,9 @@ public class MainManager : MonoBehaviour
     [Tooltip("Object to constrain max Y movement.")]
     private float maxY;
     public GameObject borderTop;
-    private float yBuffer = 0.2f;
+    private readonly float yBuffer = 0.2f;
     private static PlayerControls controls; // Reference to the generated class
     public PlayerControls PlayerControlsShared { get { return controls; } }
-    private GameObject goTextPrefab;
     private bool gameOverCalled = false;
     public GameObject enemyPrefab;
     void OnEnable()
@@ -124,12 +122,10 @@ public class MainManager : MonoBehaviour
         var ball = Instantiate(ballPrefab);
         ballRB = ball.GetComponent<Rigidbody>();
         //
-        //pointMutiplier = GameLevelData.Inst
         //Set the point multiplier
         GameLevelData levelData = GameUIData.Instance.GetGameLevelData(GameUIData.Instance.CurrentLevel);
         //Debug.Log($"GameUIData.Instance.CurrentLevel: {GameUIData.Instance.CurrentLevel}");
-        pointMutiplier = levelData.levelPoints;
-        //Debug.Log($"pointMultiplier: {pointMutiplier}");
+        //Debug.Log($"pointMultiplier: {levelData.levelPoints}");
         randomRangeLow = levelData.randomRangeLow;
         randomRangeHigh = levelData.randomRangeHigh;
         titleColor = levelData.levelMaterial.color;
@@ -152,7 +148,7 @@ public class MainManager : MonoBehaviour
                 //first row i = 0 so add 1
                 Brick brickScript = brick.GetComponent<Brick>();
                 brickScript.row = i + 1;
-                brickScript.PointValue = brickScript.row * pointMutiplier;
+                brickScript.PointValue = brickScript.row * levelData.levelPoints;
                 brickScript.onDestroyed.AddListener(AddPoint);
                 GameUIData.Instance.AddBrick();
                 //ToDo: Use method in Brick
@@ -245,13 +241,16 @@ public class MainManager : MonoBehaviour
         m_Points += point;
         // In case negative points
         if (m_Points < 0) m_Points = 0;
-        ScoreText.text = playerName + $" Score : {m_Points}";
-        if (m_Points > bestScore)
+        if (ScoreText != null)
         {
-            bestScore = m_Points;
-            playerWithBestScore = playerName;
-            //Best Score : Player Name : 0
-            bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
+            ScoreText.text = playerName + $" Score : {m_Points}";
+            if (m_Points > bestScore)
+            {
+                bestScore = m_Points;
+                playerWithBestScore = playerName;
+                //Best Score : Player Name : 0
+                bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
+            }
         }
     }
 
