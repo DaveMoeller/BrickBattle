@@ -74,7 +74,6 @@ public class MainManager : MonoBehaviour
             Instance = this;
             controls = new PlayerControls();
             DontDestroyOnLoad(Instance); // same as GameObject
-
         }
     }
 
@@ -106,8 +105,15 @@ public class MainManager : MonoBehaviour
         float randomRangeHigh = 1.0f;
         gameOverCalled = false;
         LoadAllData();
-        ScoreText.text = playerName + $" Score : {m_Points}";
-        bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
+        if (ScoreText != null)
+        {
+            ScoreText.text = playerName + $" Score : {m_Points}";
+            bestScoreText.text = "Best Score: " + playerWithBestScore + " : " + bestScore;
+        }
+        else
+        {
+            Debug.Log("ScoreText = null");
+        }
         if (MenuManager.Instance != null)
         {
             playerName = MenuManager.Instance.playerName;
